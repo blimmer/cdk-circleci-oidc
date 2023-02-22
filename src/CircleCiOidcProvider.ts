@@ -1,21 +1,12 @@
-import { OpenIdConnectProvider } from 'aws-cdk-lib/aws-iam';
+import { OpenIdConnectProvider, OpenIdConnectProviderProps } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
-export interface CircleCiOidcProviderProps {
+export interface CircleCiOidcProviderProps extends Omit<OpenIdConnectProviderProps, 'url' | 'clientIds'> {
   /**
    * The ID of your CircleCI organization. This is typically in a UUID format. You can find this ID in the CircleCI
    * dashboard UI under the "Organization Settings" tab.
    */
   organizationId: string;
-
-  /**
-   * The OIDC thumbprints used by the provider. You should not need to provide this value unless CircleCI suddenly
-   * rotates their OIDC thumbprints (e.g., in response to a security incident).
-   *
-   * If you do need to generate this thumbprint, you can follow the instructions here:
-   * https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html
-   */
-  circleCiOidcThumbprints?: string[];
 }
 
 /**
@@ -31,12 +22,12 @@ export class CircleCiOidcProvider extends Construct {
   constructor(scope: Construct, id: string, props: CircleCiOidcProviderProps) {
     super(scope, id);
 
-    const { organizationId, circleCiOidcThumbprints } = props;
+    const { organizationId, ...oidcProviderProps } = props;
 
     this.provider = new OpenIdConnectProvider(this, 'CircleCiOidcProvider', {
       url: `https://oidc.circleci.com/org/${organizationId}`,
       clientIds: [organizationId],
-      thumbprints: circleCiOidcThumbprints,
+      ...oidcProviderProps,
     });
   }
 }
