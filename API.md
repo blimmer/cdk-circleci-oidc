@@ -2,7 +2,7 @@
 
 ## Constructs <a name="Constructs" id="Constructs"></a>
 
-### CircleCiOidcProvider <a name="CircleCiOidcProvider" id="circleci-oidc.CircleCiOidcProvider"></a>
+### CircleCiOidcProvider <a name="CircleCiOidcProvider" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider"></a>
 
 This construct creates a CircleCI ODIC provider to allow AWS access from CircleCI jobs.
 
@@ -11,37 +11,37 @@ this construct once per AWS account you want to use CircleCI OIDC with.
 
 To create a role that can be assumed by CircleCI jobs, use the `CircleCiOidcRole` construct.
 
-#### Initializers <a name="Initializers" id="circleci-oidc.CircleCiOidcProvider.Initializer"></a>
+#### Initializers <a name="Initializers" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.Initializer"></a>
 
 ```typescript
-import { CircleCiOidcProvider } from 'circleci-oidc'
+import { CircleCiOidcProvider } from '@blimmer/cdk-circleci-oidc'
 
 new CircleCiOidcProvider(scope: Construct, id: string, props: CircleCiOidcProviderProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcProvider.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#circleci-oidc.CircleCiOidcProvider.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#circleci-oidc.CircleCiOidcProvider.Initializer.parameter.props">props</a></code> | <code><a href="#circleci-oidc.CircleCiOidcProviderProps">CircleCiOidcProviderProps</a></code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.Initializer.parameter.props">props</a></code> | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps">CircleCiOidcProviderProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="circleci-oidc.CircleCiOidcProvider.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="circleci-oidc.CircleCiOidcProvider.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="circleci-oidc.CircleCiOidcProvider.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#circleci-oidc.CircleCiOidcProviderProps">CircleCiOidcProviderProps</a>
+- *Type:* <a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps">CircleCiOidcProviderProps</a>
 
 ---
 
@@ -49,11 +49,11 @@ new CircleCiOidcProvider(scope: Construct, id: string, props: CircleCiOidcProvid
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcProvider.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.toString">toString</a></code> | Returns a string representation of this construct. |
 
 ---
 
-##### `toString` <a name="toString" id="circleci-oidc.CircleCiOidcProvider.toString"></a>
+##### `toString` <a name="toString" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.toString"></a>
 
 ```typescript
 public toString(): string
@@ -65,21 +65,21 @@ Returns a string representation of this construct.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcProvider.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="circleci-oidc.CircleCiOidcProvider.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isConstruct"></a>
 
 ```typescript
-import { CircleCiOidcProvider } from 'circleci-oidc'
+import { CircleCiOidcProvider } from '@blimmer/cdk-circleci-oidc'
 
 CircleCiOidcProvider.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="circleci-oidc.CircleCiOidcProvider.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -91,13 +91,13 @@ Any object.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcProvider.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#circleci-oidc.CircleCiOidcProvider.property.organizationId">organizationId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#circleci-oidc.CircleCiOidcProvider.property.provider">provider</a></code> | <code>aws-cdk-lib.aws_iam.OpenIdConnectProvider</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.organizationId">organizationId</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.provider">provider</a></code> | <code>aws-cdk-lib.aws_iam.OpenIdConnectProvider</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="circleci-oidc.CircleCiOidcProvider.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -109,7 +109,7 @@ The tree node.
 
 ---
 
-##### `organizationId`<sup>Required</sup> <a name="organizationId" id="circleci-oidc.CircleCiOidcProvider.property.organizationId"></a>
+##### `organizationId`<sup>Required</sup> <a name="organizationId" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.organizationId"></a>
 
 ```typescript
 public readonly organizationId: string;
@@ -119,7 +119,7 @@ public readonly organizationId: string;
 
 ---
 
-##### `provider`<sup>Required</sup> <a name="provider" id="circleci-oidc.CircleCiOidcProvider.property.provider"></a>
+##### `provider`<sup>Required</sup> <a name="provider" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.provider"></a>
 
 ```typescript
 public readonly provider: OpenIdConnectProvider;
@@ -130,7 +130,7 @@ public readonly provider: OpenIdConnectProvider;
 ---
 
 
-### CircleCiOidcRole <a name="CircleCiOidcRole" id="circleci-oidc.CircleCiOidcRole"></a>
+### CircleCiOidcRole <a name="CircleCiOidcRole" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole"></a>
 
 This construct creates a CircleCI ODIC provider to allow AWS access from CircleCI jobs.
 
@@ -139,37 +139,37 @@ this construct once per AWS account you want to use CircleCI OIDC with.
 
 To create a role that can be assumed by CircleCI jobs, use the `CircleCiOidcRole` construct.
 
-#### Initializers <a name="Initializers" id="circleci-oidc.CircleCiOidcRole.Initializer"></a>
+#### Initializers <a name="Initializers" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.Initializer"></a>
 
 ```typescript
-import { CircleCiOidcRole } from 'circleci-oidc'
+import { CircleCiOidcRole } from '@blimmer/cdk-circleci-oidc'
 
 new CircleCiOidcRole(scope: Construct, id: string, props: CircleCiOidcRoleProps)
 ```
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcRole.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
-| <code><a href="#circleci-oidc.CircleCiOidcRole.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#circleci-oidc.CircleCiOidcRole.Initializer.parameter.props">props</a></code> | <code><a href="#circleci-oidc.CircleCiOidcRoleProps">CircleCiOidcRoleProps</a></code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRole.Initializer.parameter.scope">scope</a></code> | <code>constructs.Construct</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRole.Initializer.parameter.id">id</a></code> | <code>string</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRole.Initializer.parameter.props">props</a></code> | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps">CircleCiOidcRoleProps</a></code> | *No description.* |
 
 ---
 
-##### `scope`<sup>Required</sup> <a name="scope" id="circleci-oidc.CircleCiOidcRole.Initializer.parameter.scope"></a>
+##### `scope`<sup>Required</sup> <a name="scope" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.Initializer.parameter.scope"></a>
 
 - *Type:* constructs.Construct
 
 ---
 
-##### `id`<sup>Required</sup> <a name="id" id="circleci-oidc.CircleCiOidcRole.Initializer.parameter.id"></a>
+##### `id`<sup>Required</sup> <a name="id" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.Initializer.parameter.id"></a>
 
 - *Type:* string
 
 ---
 
-##### `props`<sup>Required</sup> <a name="props" id="circleci-oidc.CircleCiOidcRole.Initializer.parameter.props"></a>
+##### `props`<sup>Required</sup> <a name="props" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.Initializer.parameter.props"></a>
 
-- *Type:* <a href="#circleci-oidc.CircleCiOidcRoleProps">CircleCiOidcRoleProps</a>
+- *Type:* <a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps">CircleCiOidcRoleProps</a>
 
 ---
 
@@ -177,11 +177,11 @@ new CircleCiOidcRole(scope: Construct, id: string, props: CircleCiOidcRoleProps)
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcRole.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRole.toString">toString</a></code> | Returns a string representation of this construct. |
 
 ---
 
-##### `toString` <a name="toString" id="circleci-oidc.CircleCiOidcRole.toString"></a>
+##### `toString` <a name="toString" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.toString"></a>
 
 ```typescript
 public toString(): string
@@ -193,21 +193,21 @@ Returns a string representation of this construct.
 
 | **Name** | **Description** |
 | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcRole.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRole.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
 
 ---
 
-##### ~~`isConstruct`~~ <a name="isConstruct" id="circleci-oidc.CircleCiOidcRole.isConstruct"></a>
+##### ~~`isConstruct`~~ <a name="isConstruct" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.isConstruct"></a>
 
 ```typescript
-import { CircleCiOidcRole } from 'circleci-oidc'
+import { CircleCiOidcRole } from '@blimmer/cdk-circleci-oidc'
 
 CircleCiOidcRole.isConstruct(x: any)
 ```
 
 Checks if `x` is a construct.
 
-###### `x`<sup>Required</sup> <a name="x" id="circleci-oidc.CircleCiOidcRole.isConstruct.parameter.x"></a>
+###### `x`<sup>Required</sup> <a name="x" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.isConstruct.parameter.x"></a>
 
 - *Type:* any
 
@@ -219,12 +219,12 @@ Any object.
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcRole.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
-| <code><a href="#circleci-oidc.CircleCiOidcRole.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.Role</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRole.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRole.property.role">role</a></code> | <code>aws-cdk-lib.aws_iam.Role</code> | *No description.* |
 
 ---
 
-##### `node`<sup>Required</sup> <a name="node" id="circleci-oidc.CircleCiOidcRole.property.node"></a>
+##### `node`<sup>Required</sup> <a name="node" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.property.node"></a>
 
 ```typescript
 public readonly node: Node;
@@ -236,7 +236,7 @@ The tree node.
 
 ---
 
-##### `role`<sup>Required</sup> <a name="role" id="circleci-oidc.CircleCiOidcRole.property.role"></a>
+##### `role`<sup>Required</sup> <a name="role" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.property.role"></a>
 
 ```typescript
 public readonly role: Role;
@@ -249,12 +249,12 @@ public readonly role: Role;
 
 ## Structs <a name="Structs" id="Structs"></a>
 
-### CircleCiOidcProviderProps <a name="CircleCiOidcProviderProps" id="circleci-oidc.CircleCiOidcProviderProps"></a>
+### CircleCiOidcProviderProps <a name="CircleCiOidcProviderProps" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps"></a>
 
-#### Initializer <a name="Initializer" id="circleci-oidc.CircleCiOidcProviderProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.Initializer"></a>
 
 ```typescript
-import { CircleCiOidcProviderProps } from 'circleci-oidc'
+import { CircleCiOidcProviderProps } from '@blimmer/cdk-circleci-oidc'
 
 const circleCiOidcProviderProps: CircleCiOidcProviderProps = { ... }
 ```
@@ -263,14 +263,14 @@ const circleCiOidcProviderProps: CircleCiOidcProviderProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcProviderProps.property.url">url</a></code> | <code>string</code> | The URL of the identity provider. |
-| <code><a href="#circleci-oidc.CircleCiOidcProviderProps.property.clientIds">clientIds</a></code> | <code>string[]</code> | A list of client IDs (also known as audiences). |
-| <code><a href="#circleci-oidc.CircleCiOidcProviderProps.property.thumbprints">thumbprints</a></code> | <code>string[]</code> | A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificates. |
-| <code><a href="#circleci-oidc.CircleCiOidcProviderProps.property.organizationId">organizationId</a></code> | <code>string</code> | The ID of your CircleCI organization. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.url">url</a></code> | <code>string</code> | The URL of the identity provider. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.clientIds">clientIds</a></code> | <code>string[]</code> | A list of client IDs (also known as audiences). |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.thumbprints">thumbprints</a></code> | <code>string[]</code> | A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificates. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.organizationId">organizationId</a></code> | <code>string</code> | The ID of your CircleCI organization. |
 
 ---
 
-##### `url`<sup>Required</sup> <a name="url" id="circleci-oidc.CircleCiOidcProviderProps.property.url"></a>
+##### `url`<sup>Required</sup> <a name="url" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.url"></a>
 
 ```typescript
 public readonly url: string;
@@ -292,7 +292,7 @@ OpenID Connect provider in the AWS account, you will get an error.
 
 ---
 
-##### `clientIds`<sup>Optional</sup> <a name="clientIds" id="circleci-oidc.CircleCiOidcProviderProps.property.clientIds"></a>
+##### `clientIds`<sup>Optional</sup> <a name="clientIds" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.clientIds"></a>
 
 ```typescript
 public readonly clientIds: string[];
@@ -316,7 +316,7 @@ Client IDs are up to 255 characters long.
 
 ---
 
-##### `thumbprints`<sup>Optional</sup> <a name="thumbprints" id="circleci-oidc.CircleCiOidcProviderProps.property.thumbprints"></a>
+##### `thumbprints`<sup>Optional</sup> <a name="thumbprints" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.thumbprints"></a>
 
 ```typescript
 public readonly thumbprints: string[];
@@ -344,7 +344,7 @@ certificate used by https://keys.server.example.com.
 
 ---
 
-##### `organizationId`<sup>Required</sup> <a name="organizationId" id="circleci-oidc.CircleCiOidcProviderProps.property.organizationId"></a>
+##### `organizationId`<sup>Required</sup> <a name="organizationId" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.organizationId"></a>
 
 ```typescript
 public readonly organizationId: string;
@@ -359,12 +359,12 @@ dashboard UI under the "Organization Settings" tab.
 
 ---
 
-### CircleCiOidcRoleProps <a name="CircleCiOidcRoleProps" id="circleci-oidc.CircleCiOidcRoleProps"></a>
+### CircleCiOidcRoleProps <a name="CircleCiOidcRoleProps" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps"></a>
 
-#### Initializer <a name="Initializer" id="circleci-oidc.CircleCiOidcRoleProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.Initializer"></a>
 
 ```typescript
-import { CircleCiOidcRoleProps } from 'circleci-oidc'
+import { CircleCiOidcRoleProps } from '@blimmer/cdk-circleci-oidc'
 
 const circleCiOidcRoleProps: CircleCiOidcRoleProps = { ... }
 ```
@@ -373,21 +373,21 @@ const circleCiOidcRoleProps: CircleCiOidcRoleProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.assumedBy">assumedBy</a></code> | <code>aws-cdk-lib.aws_iam.IPrincipal</code> | The IAM principal (i.e. `new ServicePrincipal('sns.amazonaws.com')`) which can assume this role. |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.description">description</a></code> | <code>string</code> | A description of the role. |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.externalIds">externalIds</a></code> | <code>string[]</code> | List of IDs that the role assumer needs to provide one of when assuming this role. |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.inlinePolicies">inlinePolicies</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_iam.PolicyDocument}</code> | A list of named policies to inline into this role. |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.managedPolicies">managedPolicies</a></code> | <code>aws-cdk-lib.aws_iam.IManagedPolicy[]</code> | A list of managed policies associated with this role. |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.maxSessionDuration">maxSessionDuration</a></code> | <code>aws-cdk-lib.Duration</code> | The maximum session duration that you want to set for the specified role. |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.path">path</a></code> | <code>string</code> | The path associated with this role. |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.permissionsBoundary">permissionsBoundary</a></code> | <code>aws-cdk-lib.aws_iam.IManagedPolicy</code> | AWS supports permissions boundaries for IAM entities (users or roles). |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.roleName">roleName</a></code> | <code>string</code> | A name for the IAM role. |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.circleCiOidcProvider">circleCiOidcProvider</a></code> | <code><a href="#circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a> \| <a href="#circleci-oidc.ManualCircleCiOidcProviderProps">ManualCircleCiOidcProviderProps</a></code> | *No description.* |
-| <code><a href="#circleci-oidc.CircleCiOidcRoleProps.property.circleCiProjectIds">circleCiProjectIds</a></code> | <code>string[]</code> | Provide the UUID(s) of the CircleCI project(s) you want to be allowed to use this role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.assumedBy">assumedBy</a></code> | <code>aws-cdk-lib.aws_iam.IPrincipal</code> | The IAM principal (i.e. `new ServicePrincipal('sns.amazonaws.com')`) which can assume this role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.description">description</a></code> | <code>string</code> | A description of the role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.externalIds">externalIds</a></code> | <code>string[]</code> | List of IDs that the role assumer needs to provide one of when assuming this role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.inlinePolicies">inlinePolicies</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_iam.PolicyDocument}</code> | A list of named policies to inline into this role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.managedPolicies">managedPolicies</a></code> | <code>aws-cdk-lib.aws_iam.IManagedPolicy[]</code> | A list of managed policies associated with this role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.maxSessionDuration">maxSessionDuration</a></code> | <code>aws-cdk-lib.Duration</code> | The maximum session duration that you want to set for the specified role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.path">path</a></code> | <code>string</code> | The path associated with this role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.permissionsBoundary">permissionsBoundary</a></code> | <code>aws-cdk-lib.aws_iam.IManagedPolicy</code> | AWS supports permissions boundaries for IAM entities (users or roles). |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.roleName">roleName</a></code> | <code>string</code> | A name for the IAM role. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.circleCiOidcProvider">circleCiOidcProvider</a></code> | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a> \| <a href="#@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps">ManualCircleCiOidcProviderProps</a></code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.circleCiProjectIds">circleCiProjectIds</a></code> | <code>string[]</code> | Provide the UUID(s) of the CircleCI project(s) you want to be allowed to use this role. |
 
 ---
 
-##### `assumedBy`<sup>Required</sup> <a name="assumedBy" id="circleci-oidc.CircleCiOidcRoleProps.property.assumedBy"></a>
+##### `assumedBy`<sup>Required</sup> <a name="assumedBy" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.assumedBy"></a>
 
 ```typescript
 public readonly assumedBy: IPrincipal;
@@ -402,7 +402,7 @@ the `assumeRolePolicy` property.
 
 ---
 
-##### `description`<sup>Optional</sup> <a name="description" id="circleci-oidc.CircleCiOidcRoleProps.property.description"></a>
+##### `description`<sup>Optional</sup> <a name="description" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.description"></a>
 
 ```typescript
 public readonly description: string;
@@ -417,7 +417,7 @@ It can be up to 1000 characters long.
 
 ---
 
-##### `externalIds`<sup>Optional</sup> <a name="externalIds" id="circleci-oidc.CircleCiOidcRoleProps.property.externalIds"></a>
+##### `externalIds`<sup>Optional</sup> <a name="externalIds" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.externalIds"></a>
 
 ```typescript
 public readonly externalIds: string[];
@@ -433,7 +433,7 @@ AssumeRole operation will fail.
 
 ---
 
-##### `inlinePolicies`<sup>Optional</sup> <a name="inlinePolicies" id="circleci-oidc.CircleCiOidcRoleProps.property.inlinePolicies"></a>
+##### `inlinePolicies`<sup>Optional</sup> <a name="inlinePolicies" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.inlinePolicies"></a>
 
 ```typescript
 public readonly inlinePolicies: {[ key: string ]: PolicyDocument};
@@ -451,7 +451,7 @@ dependencies that could otherwise be introduced).
 
 ---
 
-##### `managedPolicies`<sup>Optional</sup> <a name="managedPolicies" id="circleci-oidc.CircleCiOidcRoleProps.property.managedPolicies"></a>
+##### `managedPolicies`<sup>Optional</sup> <a name="managedPolicies" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.managedPolicies"></a>
 
 ```typescript
 public readonly managedPolicies: IManagedPolicy[];
@@ -467,7 +467,7 @@ You can add managed policies later using
 
 ---
 
-##### `maxSessionDuration`<sup>Optional</sup> <a name="maxSessionDuration" id="circleci-oidc.CircleCiOidcRoleProps.property.maxSessionDuration"></a>
+##### `maxSessionDuration`<sup>Optional</sup> <a name="maxSessionDuration" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.maxSessionDuration"></a>
 
 ```typescript
 public readonly maxSessionDuration: Duration;
@@ -495,7 +495,7 @@ but does not apply when you use those operations to create a console URL.
 
 ---
 
-##### `path`<sup>Optional</sup> <a name="path" id="circleci-oidc.CircleCiOidcRoleProps.property.path"></a>
+##### `path`<sup>Optional</sup> <a name="path" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.path"></a>
 
 ```typescript
 public readonly path: string;
@@ -511,7 +511,7 @@ Friendly Names and Paths in IAM User Guide.
 
 ---
 
-##### `permissionsBoundary`<sup>Optional</sup> <a name="permissionsBoundary" id="circleci-oidc.CircleCiOidcRoleProps.property.permissionsBoundary"></a>
+##### `permissionsBoundary`<sup>Optional</sup> <a name="permissionsBoundary" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.permissionsBoundary"></a>
 
 ```typescript
 public readonly permissionsBoundary: IManagedPolicy;
@@ -532,7 +532,7 @@ permissions boundaries.
 
 ---
 
-##### `roleName`<sup>Optional</sup> <a name="roleName" id="circleci-oidc.CircleCiOidcRoleProps.property.roleName"></a>
+##### `roleName`<sup>Optional</sup> <a name="roleName" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.roleName"></a>
 
 ```typescript
 public readonly roleName: string;
@@ -556,17 +556,17 @@ Acknowledging IAM Resources in AWS CloudFormation Templates.
 
 ---
 
-##### `circleCiOidcProvider`<sup>Required</sup> <a name="circleCiOidcProvider" id="circleci-oidc.CircleCiOidcRoleProps.property.circleCiOidcProvider"></a>
+##### `circleCiOidcProvider`<sup>Required</sup> <a name="circleCiOidcProvider" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.circleCiOidcProvider"></a>
 
 ```typescript
 public readonly circleCiOidcProvider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps;
 ```
 
-- *Type:* <a href="#circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a> | <a href="#circleci-oidc.ManualCircleCiOidcProviderProps">ManualCircleCiOidcProviderProps</a>
+- *Type:* <a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a> | <a href="#@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps">ManualCircleCiOidcProviderProps</a>
 
 ---
 
-##### `circleCiProjectIds`<sup>Optional</sup> <a name="circleCiProjectIds" id="circleci-oidc.CircleCiOidcRoleProps.property.circleCiProjectIds"></a>
+##### `circleCiProjectIds`<sup>Optional</sup> <a name="circleCiProjectIds" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.circleCiProjectIds"></a>
 
 ```typescript
 public readonly circleCiProjectIds: string[];
@@ -583,14 +583,14 @@ project's ID in the CircleCI dashboard UI under the "Project Settings" tab. It's
 
 ---
 
-### ManualCircleCiOidcProviderProps <a name="ManualCircleCiOidcProviderProps" id="circleci-oidc.ManualCircleCiOidcProviderProps"></a>
+### ManualCircleCiOidcProviderProps <a name="ManualCircleCiOidcProviderProps" id="@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps"></a>
 
 If you're using the {@link CircleCiOidcProvider} construct, pass it instead of these manually-defined props.
 
-#### Initializer <a name="Initializer" id="circleci-oidc.ManualCircleCiOidcProviderProps.Initializer"></a>
+#### Initializer <a name="Initializer" id="@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps.Initializer"></a>
 
 ```typescript
-import { ManualCircleCiOidcProviderProps } from 'circleci-oidc'
+import { ManualCircleCiOidcProviderProps } from '@blimmer/cdk-circleci-oidc'
 
 const manualCircleCiOidcProviderProps: ManualCircleCiOidcProviderProps = { ... }
 ```
@@ -599,12 +599,12 @@ const manualCircleCiOidcProviderProps: ManualCircleCiOidcProviderProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#circleci-oidc.ManualCircleCiOidcProviderProps.property.organizationId">organizationId</a></code> | <code>string</code> | The ID of your CircleCI organization. |
-| <code><a href="#circleci-oidc.ManualCircleCiOidcProviderProps.property.provider">provider</a></code> | <code>aws-cdk-lib.aws_iam.IOpenIdConnectProvider</code> | The CircleCI OIDC provider. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps.property.organizationId">organizationId</a></code> | <code>string</code> | The ID of your CircleCI organization. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps.property.provider">provider</a></code> | <code>aws-cdk-lib.aws_iam.IOpenIdConnectProvider</code> | The CircleCI OIDC provider. |
 
 ---
 
-##### `organizationId`<sup>Required</sup> <a name="organizationId" id="circleci-oidc.ManualCircleCiOidcProviderProps.property.organizationId"></a>
+##### `organizationId`<sup>Required</sup> <a name="organizationId" id="@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps.property.organizationId"></a>
 
 ```typescript
 public readonly organizationId: string;
@@ -619,7 +619,7 @@ dashboard UI under the "Organization Settings" tab.
 
 ---
 
-##### `provider`<sup>Required</sup> <a name="provider" id="circleci-oidc.ManualCircleCiOidcProviderProps.property.provider"></a>
+##### `provider`<sup>Required</sup> <a name="provider" id="@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps.property.provider"></a>
 
 ```typescript
 public readonly provider: IOpenIdConnectProvider;

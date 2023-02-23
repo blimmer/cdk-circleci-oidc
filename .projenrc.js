@@ -4,7 +4,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   authorAddress: 'hello@benlimmer.com',
   cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
-  name: 'cdk-circleci-oidc',
+  name: '@blimmer/cdk-circleci-oidc',
   repositoryUrl: 'https://github.com/blimmer/circleci-oidc.git',
 
   // deps: [],                /* Runtime dependencies of this module. */
