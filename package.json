@@ -1,5 +1,5 @@
 {
-  "name": "circleci-oidc",
+  "name": "cdk-circleci-oidc",
   "repository": {
     "type": "git",
     "url": "https://github.com/blimmer/circleci-oidc.git"
