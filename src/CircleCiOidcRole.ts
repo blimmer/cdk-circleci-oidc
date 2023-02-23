@@ -1,25 +1,25 @@
-import { Condition, IOpenIdConnectProvider, OpenIdConnectPrincipal, PolicyStatement, Role, RoleProps } from 'aws-cdk-lib/aws-iam';
+import { Condition, IOpenIdConnectProvider, OpenIdConnectPrincipal, Role, RoleProps } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { CircleCiOidcProvider } from './CircleCiOidcProvider';
 
 /**
  * If you're using the {@link CircleCiOidcProvider} construct, pass it instead of these manually-defined props.
  */
-interface ManualCircleCiOidcProviderProps {
+export interface ManualCircleCiOidcProviderProps {
   /**
    * The CircleCI OIDC provider. You can either manually create it or import it.
    */
-  provider: IOpenIdConnectProvider;
+  readonly provider: IOpenIdConnectProvider;
 
   /**
    * The ID of your CircleCI organization. This is typically in a UUID format. You can find this ID in the CircleCI
    * dashboard UI under the "Organization Settings" tab.
    */
-  organizationId: string;
+  readonly organizationId: string;
 }
 
-export interface CircleCiOidcRoleProps extends Omit<RoleProps, 'assumedBy'> {
-  circleCiOidcProvider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps;
+export interface CircleCiOidcRoleProps extends RoleProps {
+  readonly circleCiOidcProvider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps;
 
   /**
    * Provide the UUID(s) of the CircleCI project(s) you want to be allowed to use this role. If you don't provide this
@@ -28,7 +28,7 @@ export interface CircleCiOidcRoleProps extends Omit<RoleProps, 'assumedBy'> {
    *
    * @default - All CircleCI projects in the provider's organization
    */
-  circleCiProjectIds?: string[];
+  readonly circleCiProjectIds?: string[];
 }
 
 /**
@@ -43,7 +43,7 @@ export class CircleCiOidcRole extends Construct {
   constructor(scope: Construct, id: string, props: CircleCiOidcRoleProps) {
     super(scope, id);
 
-    const { circleCiProjectIds, circleCiOidcProvider, ...roleProps } = props;
+    const { circleCiProjectIds, circleCiOidcProvider, assumedBy, ...roleProps } = props;
     const { provider, organizationId } = this.extractOpenIdConnectProvider(circleCiOidcProvider);
     const oidcUrl = `oidc.circleci.com/org/${organizationId}`;
 

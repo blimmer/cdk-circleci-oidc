@@ -1,12 +1,12 @@
 import { OpenIdConnectProvider, OpenIdConnectProviderProps } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
-export interface CircleCiOidcProviderProps extends Omit<OpenIdConnectProviderProps, 'url' | 'clientIds'> {
+export interface CircleCiOidcProviderProps extends OpenIdConnectProviderProps {
   /**
    * The ID of your CircleCI organization. This is typically in a UUID format. You can find this ID in the CircleCI
    * dashboard UI under the "Organization Settings" tab.
    */
-  organizationId: string;
+  readonly organizationId: string;
 }
 
 /**
@@ -22,12 +22,14 @@ export class CircleCiOidcProvider extends Construct {
   constructor(scope: Construct, id: string, props: CircleCiOidcProviderProps) {
     super(scope, id);
 
-    const { organizationId, ...oidcProviderProps } = props;
+    const { organizationId, url, clientIds, ...oidcProviderProps } = props;
 
     this.provider = new OpenIdConnectProvider(this, 'CircleCiOidcProvider', {
       url: `https://oidc.circleci.com/org/${organizationId}`,
       clientIds: [organizationId],
       ...oidcProviderProps,
     });
+
+    this.organizationId = organizationId;
   }
 }
