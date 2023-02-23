@@ -1,4 +1,4 @@
-import { Condition, IOpenIdConnectProvider, OpenIdConnectPrincipal, Role, RoleProps } from 'aws-cdk-lib/aws-iam';
+import { Condition, IManagedPolicy, IOpenIdConnectProvider, OpenIdConnectPrincipal, PolicyDocument, Role } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { CircleCiOidcProvider } from './CircleCiOidcProvider';
 
@@ -18,7 +18,7 @@ export interface ManualCircleCiOidcProviderProps {
   readonly organizationId: string;
 }
 
-export interface CircleCiOidcRoleProps extends RoleProps {
+export interface CircleCiOidcRoleProps {
   readonly circleCiOidcProvider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps;
 
   /**
@@ -29,6 +29,20 @@ export interface CircleCiOidcRoleProps extends RoleProps {
    * @default - All CircleCI projects in the provider's organization
    */
   readonly circleCiProjectIds?: string[];
+
+  /**
+   * You can pass an explicit role name if you'd like, since you need to reference the Role ARN within your CircleCI
+   * configuration.
+   *
+   * @default - CloudFormation will auto-generate you a role name
+   */
+  readonly roleName?: string;
+
+  readonly managedPolicies?: IManagedPolicy[];
+  readonly inlinePolicies?: {
+    [name: string]: PolicyDocument;
+  };
+  readonly description?: string;
 }
 
 /**
@@ -43,7 +57,7 @@ export class CircleCiOidcRole extends Construct {
   constructor(scope: Construct, id: string, props: CircleCiOidcRoleProps) {
     super(scope, id);
 
-    const { circleCiProjectIds, circleCiOidcProvider, assumedBy, ...roleProps } = props;
+    const { circleCiProjectIds, circleCiOidcProvider, ...roleProps } = props;
     const { provider, organizationId } = this.extractOpenIdConnectProvider(circleCiOidcProvider);
     const oidcUrl = `oidc.circleci.com/org/${organizationId}`;
 
