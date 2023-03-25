@@ -1,4 +1,4 @@
-import { Condition, IManagedPolicy, IOpenIdConnectProvider, OpenIdConnectPrincipal, PolicyDocument, Role } from 'aws-cdk-lib/aws-iam';
+import { Condition, IManagedPolicy, IOpenIdConnectProvider, OpenIdConnectPrincipal, OpenIdConnectProvider, PolicyDocument, Role } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 import { CircleCiOidcProvider } from './CircleCiOidcProvider';
 
@@ -72,7 +72,7 @@ export class CircleCiOidcRole extends Construct {
 
   private extractOpenIdConnectProvider(provider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps) {
     if (provider instanceof CircleCiOidcProvider) {
-      return { provider: provider.provider, organizationId: provider.organizationId };
+      return { provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(this, 'ImportOidcProvider', provider.provider.attrArn), organizationId: provider.organizationId };
     } else {
       return provider;
     }
