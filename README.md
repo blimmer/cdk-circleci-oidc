@@ -43,7 +43,7 @@ export class CircleCiStack extends Stack {
     });
 
     const myCircleCiRole = new CircleCiOidcRole(this, 'MyCircleCiRole', {
-      provider: this.provider,
+      circleCiOidcProvider: this.provider,
       roleName: "MyCircleCiRole",
 
       // Pass some managed policies to the role
