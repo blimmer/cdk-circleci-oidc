@@ -93,7 +93,7 @@ Any object.
 | --- | --- | --- |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.organizationId">organizationId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.provider">provider</a></code> | <code>aws-cdk-lib.aws_iam.OpenIdConnectProvider</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.provider">provider</a></code> | <code>aws-cdk-lib.aws_iam.CfnOIDCProvider</code> | *No description.* |
 
 ---
 
@@ -122,10 +122,10 @@ public readonly organizationId: string;
 ##### `provider`<sup>Required</sup> <a name="provider" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.provider"></a>
 
 ```typescript
-public readonly provider: OpenIdConnectProvider;
+public readonly provider: CfnOIDCProvider;
 ```
 
-- *Type:* aws-cdk-lib.aws_iam.OpenIdConnectProvider
+- *Type:* aws-cdk-lib.aws_iam.CfnOIDCProvider
 
 ---
 
