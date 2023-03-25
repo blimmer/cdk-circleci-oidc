@@ -99,6 +99,14 @@ jobs:
 
 For detailed API docs, see [API.md](/API.md).
 
+## Python
+
+This package is available for Python as `cdk-circleci-oidc`.
+
+```bash
+pip install cdk-circleci-oidc
+```
+
 ## Contributing
 
 Contributions, issues, and feedback are welcome!

@@ -9,6 +9,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   prerelease: 'beta',
 
+  python: {
+    distName: 'cdk-circleci-oidc',
+    module: 'cdk_circleci_oidc',
+  },
+
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // devDeps: [],             /* Build dependencies for this module. */
