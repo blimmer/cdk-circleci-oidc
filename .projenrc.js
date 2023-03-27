@@ -7,8 +7,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   name: '@blimmer/cdk-circleci-oidc',
   repositoryUrl: 'https://github.com/blimmer/cdk-circleci-oidc.git',
 
-  prerelease: 'beta',
-
   python: {
     distName: 'cdk-circleci-oidc',
     module: 'cdk_circleci_oidc',
