@@ -50,6 +50,7 @@ new CircleCiOidcProvider(scope: Construct, id: string, props: CircleCiOidcProvid
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.toString">toString</a></code> | Returns a string representation of this construct. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getProviderForExport">getProviderForExport</a></code> | *No description.* |
 
 ---
 
@@ -60,6 +61,24 @@ public toString(): string
 ```
 
 Returns a string representation of this construct.
+
+##### `getProviderForExport` <a name="getProviderForExport" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getProviderForExport"></a>
+
+```typescript
+public getProviderForExport(accountId: string, importName?: string): ManualCircleCiOidcProviderProps
+```
+
+###### `accountId`<sup>Required</sup> <a name="accountId" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getProviderForExport.parameter.accountId"></a>
+
+- *Type:* string
+
+---
+
+###### `importName`<sup>Optional</sup> <a name="importName" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getProviderForExport.parameter.importName"></a>
+
+- *Type:* string
+
+---
 
 #### Static Functions <a name="Static Functions" id="Static Functions"></a>
 

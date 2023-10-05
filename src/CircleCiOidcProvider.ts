@@ -1,5 +1,6 @@
-import { CfnOIDCProvider } from 'aws-cdk-lib/aws-iam';
+import { CfnOIDCProvider, OpenIdConnectProvider } from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
+import { ManualCircleCiOidcProviderProps } from './CircleCiOidcRole';
 
 export interface CircleCiOidcProviderProps {
   /**
@@ -46,5 +47,16 @@ export class CircleCiOidcProvider extends Construct {
     });
 
     this.organizationId = organizationId;
+  }
+
+  public getProviderForExport(accountId: string, importName = 'CircleCiOidcProviderForExport'): ManualCircleCiOidcProviderProps {
+    return {
+      provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
+        this,
+        importName,
+        `arn:aws:iam::${accountId}:oidc-provider/oidc.circleci.com/org/${this.organizationId}`,
+      ),
+      organizationId: this.organizationId,
+    };
   }
 }
