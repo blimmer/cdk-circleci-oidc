@@ -32,18 +32,16 @@ import { ManagedPolicy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { Bucket } from 'aws-cdk-lib/aws-s3';
 
 export class CircleCiStack extends Stack {
-  readonly provider: CircleCiOidcProvider; // export for use in other stacks
-
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    this.provider = new CircleCiOidcProvider(this, 'OidcProvider', {
+    const provider = new CircleCiOidcProvider(this, 'OidcProvider', {
       // Find your organization ID in the CircleCI dashboard under "Organization Settings"
       organizationId: '11111111-2222-3333-4444-555555555555',
     });
 
     const myCircleCiRole = new CircleCiOidcRole(this, 'MyCircleCiRole', {
-      circleCiOidcProvider: this.provider,
+      circleCiOidcProvider: provider,
       roleName: "MyCircleCiRole",
 
       // Pass some managed policies to the role
@@ -72,7 +70,7 @@ to assume your new role.
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@3.1.4 # https://circleci.com/developer/orbs/orb/circleci/aws-cli
+  aws-cli: circleci/aws-cli@4.1.0 # https://circleci.com/developer/orbs/orb/circleci/aws-cli
 
 workflows:
   version: 2
@@ -89,10 +87,58 @@ jobs:
       - checkout
       # https://circleci.com/developer/orbs/orb/circleci/aws-cli#commands-setup
       - aws-cli/setup:
-          role-arn: 'arn:aws:iam::123456789101:role/MyCircleCiRole'
+          role_arn: 'arn:aws:iam::123456789101:role/MyCircleCiRole'
       - run:
           name: List S3 Buckets
           command: aws s3 ls
+```
+
+## Cross Stack Usage
+
+If you want to use the OIDC provider in another stack, you can use the `getProviderForExport` method.
+
+```typescript
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { CircleCiOidcProvider } from '@blimmer/cdk-circleci-oidc';
+import { Construct } from 'constructs';
+
+export class CircleCiStack extends Stack {
+  readonly circleCiOidcProvider: ManualCircleCiOidcProviderProps; // export for use in other stacks
+
+  constructor(scope: Construct, id: string, props?: StackProps) {
+    super(scope, id, props);
+
+    const provider = new CircleCiOidcProvider(this, 'OidcProvider', {
+      // Find your organization ID in the CircleCI dashboard under "Organization Settings"
+      organizationId: '11111111-2222-3333-4444-555555555555',
+    });
+
+    this.circleCiOidcProvider = provider.getProviderForExport(this.account);
+  }
+}
+```
+
+```typescript
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { CircleCiOidcRole } from '@blimmer/cdk-circleci-oidc';
+import { Construct } from 'constructs';
+import type { CircleCiStack } from './CircleCiStack';
+
+interface ConsumingStackProps {
+  circleci: CircleCi;
+}
+
+export class ConsumingStack extends Stack {
+  constructor(scope: Construct, id: string, props: ConsumingStackProps) {
+    super(scope, id, props);
+    const { circleCiOidcProvider } = props.circleci;
+
+    const myCircleCiRole = new CircleCiOidcRole(this, 'MyCircleCiRole', {
+      circleCiOidcProvider,
+      roleName: "MyCircleCiRole",
+    })
+  }
+}
 ```
 
 ## Usage
