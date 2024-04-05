@@ -37,7 +37,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
   },
 });
 
-new ProjenStruct(project, { name: "RoleProps", filePath: "src/generated/iam-role-props.ts" }).mixin(
+new ProjenStruct(project, { name: "RoleProps", filePath: "src/generated/IamRoleProps.ts" }).mixin(
   Struct.fromFqn("aws-cdk-lib.aws_iam.RoleProps").omit("assumedBy").withoutDeprecated(),
 );
 

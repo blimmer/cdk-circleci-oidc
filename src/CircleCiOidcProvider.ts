@@ -1,6 +1,5 @@
-import { CfnOIDCProvider, OpenIdConnectProvider } from "aws-cdk-lib/aws-iam";
+import { CfnOIDCProvider } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
-import { ManualCircleCiOidcProviderProps } from "./CircleCiOidcRole";
 
 export interface CircleCiOidcProviderProps {
   /**
@@ -25,38 +24,16 @@ export interface CircleCiOidcProviderProps {
  *
  * To create a role that can be assumed by CircleCI jobs, use the `CircleCiOidcRole` construct.
  */
-export class CircleCiOidcProvider extends Construct {
-  public readonly provider: CfnOIDCProvider;
+export class CircleCiOidcProvider extends CfnOIDCProvider {
   public readonly organizationId: string;
 
   constructor(scope: Construct, id: string, props: CircleCiOidcProviderProps) {
-    super(scope, id);
-
-    const { organizationId, circleCiOidcThumbprints = ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"] } = props;
-
-    // The L2 construct uses a Custom Resource, which is slow and has a few known issues
-    // (see https://github.com/aws/aws-cdk/issues/21197#issuecomment-1312843734)
-    // Therefore, we use the L1 OIDC provider construct directly instead.
-    this.provider = new CfnOIDCProvider(this, "CircleCiOidcProvider", {
-      url: `https://oidc.circleci.com/org/${organizationId}`,
-      clientIdList: [organizationId],
-      thumbprintList: circleCiOidcThumbprints,
+    super(scope, id, {
+      url: `https://oidc.circleci.com/org/${props.organizationId}`,
+      clientIdList: [props.organizationId],
+      thumbprintList: props.circleCiOidcThumbprints ?? ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"],
     });
 
-    this.organizationId = organizationId;
-  }
-
-  public getProviderForExport(
-    accountId: string,
-    importName = "CircleCiOidcProviderForExport",
-  ): ManualCircleCiOidcProviderProps {
-    return {
-      provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
-        this,
-        importName,
-        `arn:aws:iam::${accountId}:oidc-provider/oidc.circleci.com/org/${this.organizationId}`,
-      ),
-      organizationId: this.organizationId,
-    };
+    this.organizationId = props.organizationId;
   }
 }

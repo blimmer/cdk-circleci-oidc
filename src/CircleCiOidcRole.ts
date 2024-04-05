@@ -82,11 +82,7 @@ export class CircleCiOidcRole extends Construct {
   private extractOpenIdConnectProvider(provider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps) {
     if (provider instanceof CircleCiOidcProvider) {
       return {
-        provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
-          this,
-          "ImportOidcProvider",
-          provider.provider.attrArn,
-        ),
+        provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(this, "ImportOidcProvider", provider.attrArn),
         organizationId: provider.organizationId,
       };
     } else {

@@ -209,7 +209,22 @@ new CircleCiOidcProvider(scope: Construct, id: string, props: CircleCiOidcProvid
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.toString">toString</a></code> | Returns a string representation of this construct. |
-| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getProviderForExport">getProviderForExport</a></code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.overrideLogicalId">overrideLogicalId</a></code> | Overrides the auto-generated logical ID with a specific ID. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDeletionOverride">addDeletionOverride</a></code> | Syntactic sugar for `addOverride(path, undefined)`. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDependency">addDependency</a></code> | Indicates that this resource depends on another resource and cannot be provisioned unless the other resource has been successfully provisioned. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDependsOn">addDependsOn</a></code> | Indicates that this resource depends on another resource and cannot be provisioned unless the other resource has been successfully provisioned. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addMetadata">addMetadata</a></code> | Add a value to the CloudFormation Resource Metadata. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addOverride">addOverride</a></code> | Adds an override to the synthesized CloudFormation resource. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addPropertyDeletionOverride">addPropertyDeletionOverride</a></code> | Adds an override that deletes the value of a property from the resource definition. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addPropertyOverride">addPropertyOverride</a></code> | Adds an override to a resource property. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.applyRemovalPolicy">applyRemovalPolicy</a></code> | Sets the deletion policy of the resource based on the removal policy specified. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getAtt">getAtt</a></code> | Returns a token for an runtime attribute of this resource. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getMetadata">getMetadata</a></code> | Retrieve a value value from the CloudFormation Resource Metadata. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.obtainDependencies">obtainDependencies</a></code> | Retrieves an array of resources this resource depends on. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.obtainResourceDependencies">obtainResourceDependencies</a></code> | Get a shallow copy of dependencies between this resource and other resources in the same stack. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.removeDependency">removeDependency</a></code> | Indicates that this resource no longer depends on another resource. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.replaceDependency">replaceDependency</a></code> | Replaces one dependency with another. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.inspect">inspect</a></code> | Examines the CloudFormation resource and discloses attributes. |
 
 ---
 
@@ -221,21 +236,367 @@ public toString(): string
 
 Returns a string representation of this construct.
 
-##### `getProviderForExport` <a name="getProviderForExport" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getProviderForExport"></a>
+##### `overrideLogicalId` <a name="overrideLogicalId" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.overrideLogicalId"></a>
 
 ```typescript
-public getProviderForExport(accountId: string, importName?: string): ManualCircleCiOidcProviderProps
+public overrideLogicalId(newLogicalId: string): void
 ```
 
-###### `accountId`<sup>Required</sup> <a name="accountId" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getProviderForExport.parameter.accountId"></a>
+Overrides the auto-generated logical ID with a specific ID.
+
+###### `newLogicalId`<sup>Required</sup> <a name="newLogicalId" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.overrideLogicalId.parameter.newLogicalId"></a>
+
+- *Type:* string
+
+The new logical ID to use for this stack element.
+
+---
+
+##### `addDeletionOverride` <a name="addDeletionOverride" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDeletionOverride"></a>
+
+```typescript
+public addDeletionOverride(path: string): void
+```
+
+Syntactic sugar for `addOverride(path, undefined)`.
+
+###### `path`<sup>Required</sup> <a name="path" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDeletionOverride.parameter.path"></a>
+
+- *Type:* string
+
+The path of the value to delete.
+
+---
+
+##### `addDependency` <a name="addDependency" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDependency"></a>
+
+```typescript
+public addDependency(target: CfnResource): void
+```
+
+Indicates that this resource depends on another resource and cannot be provisioned unless the other resource has been successfully provisioned.
+
+This can be used for resources across stacks (or nested stack) boundaries
+and the dependency will automatically be transferred to the relevant scope.
+
+###### `target`<sup>Required</sup> <a name="target" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+---
+
+##### ~~`addDependsOn`~~ <a name="addDependsOn" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDependsOn"></a>
+
+```typescript
+public addDependsOn(target: CfnResource): void
+```
+
+Indicates that this resource depends on another resource and cannot be provisioned unless the other resource has been successfully provisioned.
+
+###### `target`<sup>Required</sup> <a name="target" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addDependsOn.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+---
+
+##### `addMetadata` <a name="addMetadata" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addMetadata"></a>
+
+```typescript
+public addMetadata(key: string, value: any): void
+```
+
+Add a value to the CloudFormation Resource Metadata.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html
+
+Note that this is a different set of metadata from CDK node metadata; this
+metadata ends up in the stack template under the resource, whereas CDK
+node metadata ends up in the Cloud Assembly.](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html
+
+Note that this is a different set of metadata from CDK node metadata; this
+metadata ends up in the stack template under the resource, whereas CDK
+node metadata ends up in the Cloud Assembly.)
+
+###### `key`<sup>Required</sup> <a name="key" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addMetadata.parameter.key"></a>
 
 - *Type:* string
 
 ---
 
-###### `importName`<sup>Optional</sup> <a name="importName" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getProviderForExport.parameter.importName"></a>
+###### `value`<sup>Required</sup> <a name="value" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addMetadata.parameter.value"></a>
+
+- *Type:* any
+
+---
+
+##### `addOverride` <a name="addOverride" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addOverride"></a>
+
+```typescript
+public addOverride(path: string, value: any): void
+```
+
+Adds an override to the synthesized CloudFormation resource.
+
+To add a
+property override, either use `addPropertyOverride` or prefix `path` with
+"Properties." (i.e. `Properties.TopicName`).
+
+If the override is nested, separate each nested level using a dot (.) in the path parameter.
+If there is an array as part of the nesting, specify the index in the path.
+
+To include a literal `.` in the property name, prefix with a `\`. In most
+programming languages you will need to write this as `"\\."` because the
+`\` itself will need to be escaped.
+
+For example,
+```typescript
+cfnResource.addOverride('Properties.GlobalSecondaryIndexes.0.Projection.NonKeyAttributes', ['myattribute']);
+cfnResource.addOverride('Properties.GlobalSecondaryIndexes.1.ProjectionType', 'INCLUDE');
+```
+would add the overrides
+```json
+"Properties": {
+  "GlobalSecondaryIndexes": [
+    {
+      "Projection": {
+        "NonKeyAttributes": [ "myattribute" ]
+        ...
+      }
+      ...
+    },
+    {
+      "ProjectionType": "INCLUDE"
+      ...
+    },
+  ]
+  ...
+}
+```
+
+The `value` argument to `addOverride` will not be processed or translated
+in any way. Pass raw JSON values in here with the correct capitalization
+for CloudFormation. If you pass CDK classes or structs, they will be
+rendered with lowercased key names, and CloudFormation will reject the
+template.
+
+###### `path`<sup>Required</sup> <a name="path" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addOverride.parameter.path"></a>
 
 - *Type:* string
+
+The path of the property, you can use dot notation to override values in complex types.
+
+Any intermediate keys
+will be created as needed.
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addOverride.parameter.value"></a>
+
+- *Type:* any
+
+The value.
+
+Could be primitive or complex.
+
+---
+
+##### `addPropertyDeletionOverride` <a name="addPropertyDeletionOverride" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addPropertyDeletionOverride"></a>
+
+```typescript
+public addPropertyDeletionOverride(propertyPath: string): void
+```
+
+Adds an override that deletes the value of a property from the resource definition.
+
+###### `propertyPath`<sup>Required</sup> <a name="propertyPath" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addPropertyDeletionOverride.parameter.propertyPath"></a>
+
+- *Type:* string
+
+The path to the property.
+
+---
+
+##### `addPropertyOverride` <a name="addPropertyOverride" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addPropertyOverride"></a>
+
+```typescript
+public addPropertyOverride(propertyPath: string, value: any): void
+```
+
+Adds an override to a resource property.
+
+Syntactic sugar for `addOverride("Properties.<...>", value)`.
+
+###### `propertyPath`<sup>Required</sup> <a name="propertyPath" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addPropertyOverride.parameter.propertyPath"></a>
+
+- *Type:* string
+
+The path of the property.
+
+---
+
+###### `value`<sup>Required</sup> <a name="value" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.addPropertyOverride.parameter.value"></a>
+
+- *Type:* any
+
+The value.
+
+---
+
+##### `applyRemovalPolicy` <a name="applyRemovalPolicy" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.applyRemovalPolicy"></a>
+
+```typescript
+public applyRemovalPolicy(policy?: RemovalPolicy, options?: RemovalPolicyOptions): void
+```
+
+Sets the deletion policy of the resource based on the removal policy specified.
+
+The Removal Policy controls what happens to this resource when it stops
+being managed by CloudFormation, either because you've removed it from the
+CDK application or because you've made a change that requires the resource
+to be replaced.
+
+The resource can be deleted (`RemovalPolicy.DESTROY`), or left in your AWS
+account for data recovery and cleanup later (`RemovalPolicy.RETAIN`). In some
+cases, a snapshot can be taken of the resource prior to deletion
+(`RemovalPolicy.SNAPSHOT`). A list of resources that support this policy
+can be found in the following link:
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html#aws-attribute-deletionpolicy-options](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-deletionpolicy.html#aws-attribute-deletionpolicy-options)
+
+###### `policy`<sup>Optional</sup> <a name="policy" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.applyRemovalPolicy.parameter.policy"></a>
+
+- *Type:* aws-cdk-lib.RemovalPolicy
+
+---
+
+###### `options`<sup>Optional</sup> <a name="options" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.applyRemovalPolicy.parameter.options"></a>
+
+- *Type:* aws-cdk-lib.RemovalPolicyOptions
+
+---
+
+##### `getAtt` <a name="getAtt" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getAtt"></a>
+
+```typescript
+public getAtt(attributeName: string, typeHint?: ResolutionTypeHint): Reference
+```
+
+Returns a token for an runtime attribute of this resource.
+
+Ideally, use generated attribute accessors (e.g. `resource.arn`), but this can be used for future compatibility
+in case there is no generated attribute.
+
+###### `attributeName`<sup>Required</sup> <a name="attributeName" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getAtt.parameter.attributeName"></a>
+
+- *Type:* string
+
+The name of the attribute.
+
+---
+
+###### `typeHint`<sup>Optional</sup> <a name="typeHint" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getAtt.parameter.typeHint"></a>
+
+- *Type:* aws-cdk-lib.ResolutionTypeHint
+
+---
+
+##### `getMetadata` <a name="getMetadata" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getMetadata"></a>
+
+```typescript
+public getMetadata(key: string): any
+```
+
+Retrieve a value value from the CloudFormation Resource Metadata.
+
+> [https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html
+
+Note that this is a different set of metadata from CDK node metadata; this
+metadata ends up in the stack template under the resource, whereas CDK
+node metadata ends up in the Cloud Assembly.](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/metadata-section-structure.html
+
+Note that this is a different set of metadata from CDK node metadata; this
+metadata ends up in the stack template under the resource, whereas CDK
+node metadata ends up in the Cloud Assembly.)
+
+###### `key`<sup>Required</sup> <a name="key" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.getMetadata.parameter.key"></a>
+
+- *Type:* string
+
+---
+
+##### `obtainDependencies` <a name="obtainDependencies" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.obtainDependencies"></a>
+
+```typescript
+public obtainDependencies(): Stack | CfnResource[]
+```
+
+Retrieves an array of resources this resource depends on.
+
+This assembles dependencies on resources across stacks (including nested stacks)
+automatically.
+
+##### `obtainResourceDependencies` <a name="obtainResourceDependencies" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.obtainResourceDependencies"></a>
+
+```typescript
+public obtainResourceDependencies(): CfnResource[]
+```
+
+Get a shallow copy of dependencies between this resource and other resources in the same stack.
+
+##### `removeDependency` <a name="removeDependency" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.removeDependency"></a>
+
+```typescript
+public removeDependency(target: CfnResource): void
+```
+
+Indicates that this resource no longer depends on another resource.
+
+This can be used for resources across stacks (including nested stacks)
+and the dependency will automatically be removed from the relevant scope.
+
+###### `target`<sup>Required</sup> <a name="target" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.removeDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+---
+
+##### `replaceDependency` <a name="replaceDependency" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.replaceDependency"></a>
+
+```typescript
+public replaceDependency(target: CfnResource, newTarget: CfnResource): void
+```
+
+Replaces one dependency with another.
+
+###### `target`<sup>Required</sup> <a name="target" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.replaceDependency.parameter.target"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+The dependency to replace.
+
+---
+
+###### `newTarget`<sup>Required</sup> <a name="newTarget" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.replaceDependency.parameter.newTarget"></a>
+
+- *Type:* aws-cdk-lib.CfnResource
+
+The new dependency to add.
+
+---
+
+##### `inspect` <a name="inspect" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.inspect"></a>
+
+```typescript
+public inspect(inspector: TreeInspector): void
+```
+
+Examines the CloudFormation resource and discloses attributes.
+
+###### `inspector`<sup>Required</sup> <a name="inspector" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.inspect.parameter.inspector"></a>
+
+- *Type:* aws-cdk-lib.TreeInspector
+
+tree inspector to collect and process attributes.
 
 ---
 
@@ -244,6 +605,8 @@ public getProviderForExport(accountId: string, importName?: string): ManualCircl
 | **Name** | **Description** |
 | --- | --- |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isConstruct">isConstruct</a></code> | Checks if `x` is a construct. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isCfnElement">isCfnElement</a></code> | Returns `true` if a construct is a stack element (i.e. part of the synthesized cloudformation template). |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isCfnResource">isCfnResource</a></code> | Check whether the given construct is a CfnResource. |
 
 ---
 
@@ -265,13 +628,58 @@ Any object.
 
 ---
 
+##### `isCfnElement` <a name="isCfnElement" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isCfnElement"></a>
+
+```typescript
+import { CircleCiOidcProvider } from '@blimmer/cdk-circleci-oidc'
+
+CircleCiOidcProvider.isCfnElement(x: any)
+```
+
+Returns `true` if a construct is a stack element (i.e. part of the synthesized cloudformation template).
+
+Uses duck-typing instead of `instanceof` to allow stack elements from different
+versions of this library to be included in the same stack.
+
+###### `x`<sup>Required</sup> <a name="x" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isCfnElement.parameter.x"></a>
+
+- *Type:* any
+
+---
+
+##### `isCfnResource` <a name="isCfnResource" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isCfnResource"></a>
+
+```typescript
+import { CircleCiOidcProvider } from '@blimmer/cdk-circleci-oidc'
+
+CircleCiOidcProvider.isCfnResource(construct: IConstruct)
+```
+
+Check whether the given construct is a CfnResource.
+
+###### `construct`<sup>Required</sup> <a name="construct" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.isCfnResource.parameter.construct"></a>
+
+- *Type:* constructs.IConstruct
+
+---
+
 #### Properties <a name="Properties" id="Properties"></a>
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.node">node</a></code> | <code>constructs.Node</code> | The tree node. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.creationStack">creationStack</a></code> | <code>string[]</code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.logicalId">logicalId</a></code> | <code>string</code> | The logical ID for this CloudFormation stack element. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.stack">stack</a></code> | <code>aws-cdk-lib.Stack</code> | The stack in which this element is defined. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.ref">ref</a></code> | <code>string</code> | Return a string that will be resolved to a CloudFormation `{ Ref }` for this element. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.cfnOptions">cfnOptions</a></code> | <code>aws-cdk-lib.ICfnResourceOptions</code> | Options for this resource, such as condition, update policy etc. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.cfnResourceType">cfnResourceType</a></code> | <code>string</code> | AWS resource type. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.attrArn">attrArn</a></code> | <code>string</code> | Returns the Amazon Resource Name (ARN) for the specified `AWS::IAM::OIDCProvider` resource. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.tags">tags</a></code> | <code>aws-cdk-lib.TagManager</code> | A list of tags that are attached to the specified IAM OIDC provider. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.thumbprintList">thumbprintList</a></code> | <code>string[]</code> | A list of certificate thumbprints that are associated with the specified IAM OIDC provider resource object. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.clientIdList">clientIdList</a></code> | <code>string[]</code> | A list of client IDs (also known as audiences) that are associated with the specified IAM OIDC provider resource object. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.url">url</a></code> | <code>string</code> | The URL that the IAM OIDC provider resource object is associated with. |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.organizationId">organizationId</a></code> | <code>string</code> | *No description.* |
-| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.provider">provider</a></code> | <code>aws-cdk-lib.aws_iam.CfnOIDCProvider</code> | *No description.* |
 
 ---
 
@@ -287,6 +695,162 @@ The tree node.
 
 ---
 
+##### `creationStack`<sup>Required</sup> <a name="creationStack" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.creationStack"></a>
+
+```typescript
+public readonly creationStack: string[];
+```
+
+- *Type:* string[]
+
+---
+
+##### `logicalId`<sup>Required</sup> <a name="logicalId" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.logicalId"></a>
+
+```typescript
+public readonly logicalId: string;
+```
+
+- *Type:* string
+
+The logical ID for this CloudFormation stack element.
+
+The logical ID of the element
+is calculated from the path of the resource node in the construct tree.
+
+To override this value, use `overrideLogicalId(newLogicalId)`.
+
+---
+
+##### `stack`<sup>Required</sup> <a name="stack" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.stack"></a>
+
+```typescript
+public readonly stack: Stack;
+```
+
+- *Type:* aws-cdk-lib.Stack
+
+The stack in which this element is defined.
+
+CfnElements must be defined within a stack scope (directly or indirectly).
+
+---
+
+##### `ref`<sup>Required</sup> <a name="ref" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.ref"></a>
+
+```typescript
+public readonly ref: string;
+```
+
+- *Type:* string
+
+Return a string that will be resolved to a CloudFormation `{ Ref }` for this element.
+
+If, by any chance, the intrinsic reference of a resource is not a string, you could
+coerce it to an IResolvable through `Lazy.any({ produce: resource.ref })`.
+
+---
+
+##### `cfnOptions`<sup>Required</sup> <a name="cfnOptions" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.cfnOptions"></a>
+
+```typescript
+public readonly cfnOptions: ICfnResourceOptions;
+```
+
+- *Type:* aws-cdk-lib.ICfnResourceOptions
+
+Options for this resource, such as condition, update policy etc.
+
+---
+
+##### `cfnResourceType`<sup>Required</sup> <a name="cfnResourceType" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.cfnResourceType"></a>
+
+```typescript
+public readonly cfnResourceType: string;
+```
+
+- *Type:* string
+
+AWS resource type.
+
+---
+
+##### `attrArn`<sup>Required</sup> <a name="attrArn" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.attrArn"></a>
+
+```typescript
+public readonly attrArn: string;
+```
+
+- *Type:* string
+
+Returns the Amazon Resource Name (ARN) for the specified `AWS::IAM::OIDCProvider` resource.
+
+---
+
+##### `tags`<sup>Required</sup> <a name="tags" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.tags"></a>
+
+```typescript
+public readonly tags: TagManager;
+```
+
+- *Type:* aws-cdk-lib.TagManager
+
+A list of tags that are attached to the specified IAM OIDC provider.
+
+The returned list of tags is sorted by tag key. For more information about tagging, see [Tagging IAM resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the *IAM User Guide* .
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-oidcprovider.html#cfn-iam-oidcprovider-tags](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-oidcprovider.html#cfn-iam-oidcprovider-tags)
+
+---
+
+##### `thumbprintList`<sup>Required</sup> <a name="thumbprintList" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.thumbprintList"></a>
+
+```typescript
+public readonly thumbprintList: string[];
+```
+
+- *Type:* string[]
+
+A list of certificate thumbprints that are associated with the specified IAM OIDC provider resource object.
+
+For more information, see [CreateOpenIDConnectProvider](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html) .
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-oidcprovider.html#cfn-iam-oidcprovider-thumbprintlist](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-oidcprovider.html#cfn-iam-oidcprovider-thumbprintlist)
+
+---
+
+##### `clientIdList`<sup>Optional</sup> <a name="clientIdList" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.clientIdList"></a>
+
+```typescript
+public readonly clientIdList: string[];
+```
+
+- *Type:* string[]
+
+A list of client IDs (also known as audiences) that are associated with the specified IAM OIDC provider resource object.
+
+For more information, see [CreateOpenIDConnectProvider](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html) .
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-oidcprovider.html#cfn-iam-oidcprovider-clientidlist](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-oidcprovider.html#cfn-iam-oidcprovider-clientidlist)
+
+---
+
+##### `url`<sup>Optional</sup> <a name="url" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.url"></a>
+
+```typescript
+public readonly url: string;
+```
+
+- *Type:* string
+
+The URL that the IAM OIDC provider resource object is associated with.
+
+For more information, see [CreateOpenIDConnectProvider](https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateOpenIDConnectProvider.html) .
+
+> [http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-oidcprovider.html#cfn-iam-oidcprovider-url](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-oidcprovider.html#cfn-iam-oidcprovider-url)
+
+---
+
 ##### `organizationId`<sup>Required</sup> <a name="organizationId" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.organizationId"></a>
 
 ```typescript
@@ -297,16 +861,25 @@ public readonly organizationId: string;
 
 ---
 
-##### `provider`<sup>Required</sup> <a name="provider" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.provider"></a>
+#### Constants <a name="Constants" id="Constants"></a>
 
-```typescript
-public readonly provider: CfnOIDCProvider;
-```
-
-- *Type:* aws-cdk-lib.aws_iam.CfnOIDCProvider
+| **Name** | **Type** | **Description** |
+| --- | --- | --- |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.CFN_RESOURCE_TYPE_NAME">CFN_RESOURCE_TYPE_NAME</a></code> | <code>string</code> | The CloudFormation resource type name for this resource class. |
 
 ---
 
+##### `CFN_RESOURCE_TYPE_NAME`<sup>Required</sup> <a name="CFN_RESOURCE_TYPE_NAME" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProvider.property.CFN_RESOURCE_TYPE_NAME"></a>
+
+```typescript
+public readonly CFN_RESOURCE_TYPE_NAME: string;
+```
+
+- *Type:* string
+
+The CloudFormation resource type name for this resource class.
+
+---
 
 ### CircleCiOidcRole <a name="CircleCiOidcRole" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole"></a>
 
@@ -493,7 +1066,7 @@ const circleCiOidcRoleProps: CircleCiOidcRoleProps = { ... }
 
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
-| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.circleCiOidcProvider">circleCiOidcProvider</a></code> | <code><a href="#@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps">ManualCircleCiOidcProviderProps</a> \| <a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a></code> | *No description.* |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.circleCiOidcProvider">circleCiOidcProvider</a></code> | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a> \| <a href="#@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps">ManualCircleCiOidcProviderProps</a></code> | *No description.* |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.circleCiProjectIds">circleCiProjectIds</a></code> | <code>string[]</code> | Provide the UUID(s) of the CircleCI project(s) you want to be allowed to use this role. |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.description">description</a></code> | <code>string</code> | *No description.* |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.inlinePolicies">inlinePolicies</a></code> | <code>{[ key: string ]: aws-cdk-lib.aws_iam.PolicyDocument}</code> | *No description.* |
@@ -505,10 +1078,10 @@ const circleCiOidcRoleProps: CircleCiOidcRoleProps = { ... }
 ##### `circleCiOidcProvider`<sup>Required</sup> <a name="circleCiOidcProvider" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.property.circleCiOidcProvider"></a>
 
 ```typescript
-public readonly circleCiOidcProvider: ManualCircleCiOidcProviderProps | CircleCiOidcProvider;
+public readonly circleCiOidcProvider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps;
 ```
 
-- *Type:* <a href="#@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps">ManualCircleCiOidcProviderProps</a> | <a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a>
+- *Type:* <a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a> | <a href="#@blimmer/cdk-circleci-oidc.ManualCircleCiOidcProviderProps">ManualCircleCiOidcProviderProps</a>
 
 ---
 
