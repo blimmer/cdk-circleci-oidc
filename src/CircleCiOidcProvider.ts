@@ -21,7 +21,7 @@ export interface CircleCiOidcProviderProps {
    * If you do need to generate this thumbprint, you can follow the instructions here:
    * https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html
    */
-  readonly circleCiOidcThumbprints?: string[];
+  readonly thumbprints?: string[];
 }
 
 /**
@@ -47,7 +47,7 @@ export class CircleCiOidcProvider extends CfnOIDCProvider implements ICircleCiOi
     super(scope, id, {
       url: `https://oidc.circleci.com/org/${props.organizationId}`,
       clientIdList: [props.organizationId],
-      thumbprintList: props.circleCiOidcThumbprints ?? ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"],
+      thumbprintList: props.thumbprints ?? ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"],
     });
 
     this.arn = this.attrArn;

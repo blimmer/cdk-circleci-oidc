@@ -43,7 +43,13 @@ const role = new CircleCiOidcRole(this, "CircleCiOidcRole", {
 
 Much better!
 
-### `CircleCiOidcRole` Constructor Property Changes
+### Constructor Property Changes
+
+#### `CircleCiOidcProvider`
+
+The property `circleCiOidcThumbprints` has been renamed to `thumbprints` for brevity.
+
+#### `CircleCiOidcRole`
 
 The properties `circleCiOidcProvider` and `circleCiProjectIds` have been renamed to `provider` and `projectIds` for
 brevity.
