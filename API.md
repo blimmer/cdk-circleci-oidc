@@ -1,14 +1,14 @@
 # CircleCI OIDC
 
-This repository contains constructs to communicate between CircleCI and AWS via an Open ID Connect (OIDC) provider.
-The process is described in [this CircleCI blog post](https://circleci.com/blog/openid-connect-identity-tokens/).
+This repository contains constructs to communicate between CircleCI and AWS via an Open ID Connect (OIDC) provider. The
+process is described in [this CircleCI blog post](https://circleci.com/blog/openid-connect-identity-tokens/).
 
 ## Security Benefits
 
 By using the OpenID Connect provider, you can communicate with AWS from CircleCI without saving static credentials
-(e.g., `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) in your CircleCI project settings or a context. Removing
-static credentials, especially in light of the early 2023 [breach](https://circleci.com/blog/jan-4-2023-incident-report/),
-is a best practice for security.
+(e.g., `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) in your CircleCI project settings or a context. Removing static
+credentials, especially in light of the early 2023 [breach](https://circleci.com/blog/jan-4-2023-incident-report/), is a
+best practice for security.
 
 ## Quick Start
 
@@ -25,46 +25,48 @@ yarn add @blimmer/cdk-circleci-oidc
 Then, create the provider and role(s).
 
 ```typescript
-import { Stack, StackProps } from 'aws-cdk-lib';
-import { CircleCiOidcProvider, CircleCiOidcRole } from '@blimmer/cdk-circleci-oidc';
-import { Construct } from 'constructs';
-import { ManagedPolicy, PolicyStatement } from 'aws-cdk-lib/aws-iam';
-import { Bucket } from 'aws-cdk-lib/aws-s3';
+import { Stack, StackProps } from "aws-cdk-lib";
+import { CircleCiOidcProvider, CircleCiOidcRole } from "@blimmer/cdk-circleci-oidc";
+import { Construct } from "constructs";
+import { ManagedPolicy, PolicyStatement } from "aws-cdk-lib/aws-iam";
+import { Bucket } from "aws-cdk-lib/aws-s3";
 
 export class CircleCiStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const provider = new CircleCiOidcProvider(this, 'OidcProvider', {
+    // The provider is only created _once per AWS account_. It might make sense to define this in a separate stack
+    // that defines more global resources. See below for how to use import the provider in stacks that don't define it.
+    const provider = new CircleCiOidcProvider(this, "OidcProvider", {
       // Find your organization ID in the CircleCI dashboard under "Organization Settings"
-      organizationId: '11111111-2222-3333-4444-555555555555',
+      organizationId: "11111111-2222-3333-4444-555555555555",
     });
 
-    const myCircleCiRole = new CircleCiOidcRole(this, 'MyCircleCiRole', {
-      circleCiOidcProvider: provider,
+    const myCircleCiRole = new CircleCiOidcRole(this, "MyCircleCiRole", {
+      provider,
       roleName: "MyCircleCiRole",
 
       // Pass some managed policies to the role
-      managedPolicies: [
-        ManagedPolicy.fromAwsManagedPolicyName('AmazonS3ReadOnlyAccess'),
-      ],
-    })
+      managedPolicies: [ManagedPolicy.fromAwsManagedPolicyName("AmazonS3ReadOnlyAccess")],
+    });
 
-    // You can also access the role from the construct. This allows adding roles and using `grant` methods after the
-    // construct has been created.
-    myCircleCiRole.role.addToPolicy(new PolicyStatement({
-      actions: ['s3:ListAllMyBuckets'],
-      resources: ['*'],
-    }));
+    // You can work with the CircleCI role like any other role
+    myCircleCiRole.addToPolicy(
+      new PolicyStatement({
+        actions: ["s3:ListAllMyBuckets"],
+        resources: ["*"],
+      }),
+    );
 
-    const bucket = new Bucket(this, 'MyBucket');
-    bucket.grantRead(myCircleCiRole.role);
+    // Including using `.grant` convenience methods
+    const bucket = new Bucket(this, "MyBucket");
+    bucket.grantRead(myCircleCiRole);
   }
 }
 ```
 
-Now, in your `.circleci/config.yml` file, you can use the [AWS CLI Orb](https://circleci.com/developer/orbs/orb/circleci/aws-cli)
-to assume your new role.
+Now, in your `.circleci/config.yml` file, you can use the
+[AWS CLI Orb](https://circleci.com/developer/orbs/orb/circleci/aws-cli) to assume your new role.
 
 ```yaml
 version: 2.1
@@ -87,56 +89,30 @@ jobs:
       - checkout
       # https://circleci.com/developer/orbs/orb/circleci/aws-cli#commands-setup
       - aws-cli/setup:
-          role_arn: 'arn:aws:iam::123456789101:role/MyCircleCiRole'
+          role_arn: "arn:aws:iam::123456789101:role/MyCircleCiRole"
       - run:
           name: List S3 Buckets
           command: aws s3 ls
 ```
 
-## Cross Stack Usage
+## Usage in Stacks that Don't Define the Provider
 
-If you want to use the OIDC provider in another stack, you can use the `getProviderForExport` method.
+The `CircleCiOidcProvider` is only created **once per account**. You can use the
+`CircleCiOidcProvider.fromOrganizationId` method to import a previously created provider into any stack.
 
 ```typescript
-import { Stack, StackProps } from 'aws-cdk-lib';
-import { CircleCiOidcProvider } from '@blimmer/cdk-circleci-oidc';
-import { Construct } from 'constructs';
+import { Stack, StackProps } from "aws-cdk-lib";
+import { CircleCiOidcRole, CircleCiOidcProvider } from "@blimmer/cdk-circleci-oidc";
+import { Construct } from "constructs";
 
-export class CircleCiStack extends Stack {
-  readonly circleCiOidcProvider: ManualCircleCiOidcProviderProps; // export for use in other stacks
-
+export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    const provider = new CircleCiOidcProvider(this, 'OidcProvider', {
-      // Find your organization ID in the CircleCI dashboard under "Organization Settings"
-      organizationId: '11111111-2222-3333-4444-555555555555',
-    });
-
-    this.circleCiOidcProvider = provider.getProviderForExport(this.account);
-  }
-}
-```
-
-```typescript
-import { Stack, StackProps } from 'aws-cdk-lib';
-import { CircleCiOidcRole } from '@blimmer/cdk-circleci-oidc';
-import { Construct } from 'constructs';
-import type { CircleCiStack } from './CircleCiStack';
-
-interface ConsumingStackProps {
-  circleci: CircleCi;
-}
-
-export class ConsumingStack extends Stack {
-  constructor(scope: Construct, id: string, props: ConsumingStackProps) {
-    super(scope, id, props);
-    const { circleCiOidcProvider } = props.circleci;
-
-    const myCircleCiRole = new CircleCiOidcRole(this, 'MyCircleCiRole', {
-      circleCiOidcProvider,
+    const myCircleCiRole = new CircleCiOidcRole(this, "MyCircleCiRole", {
+      provider: CircleCiOidcProvider.fromOrganizationId(this, "11111111-2222-3333-4444-555555555555"),
       roleName: "MyCircleCiRole",
-    })
+    });
   }
 }
 ```
@@ -152,6 +128,11 @@ This package is available for Python as `cdk-circleci-oidc`.
 ```bash
 pip install cdk-circleci-oidc
 ```
+
+## Upgrading Between Major Versions
+
+The API can be expected to change between major versions. Please consult the [UPGRADING docs](/UPGRADING.md.md) for for
+information.
 
 ## Contributing
 
@@ -169,6 +150,8 @@ This construct creates a CircleCI ODIC provider to allow AWS access from CircleC
 
 You'll need to instantiate
 this construct once per AWS account you want to use CircleCI OIDC with.
+
+You can import a existing provider using `CircleCiOidcProvider.fromOrganizationId`.
 
 To create a role that can be assumed by CircleCI jobs, use the `CircleCiOidcRole` construct.
 
@@ -917,12 +900,7 @@ The CloudFormation resource type name for this resource class.
 
 ### CircleCiOidcRole <a name="CircleCiOidcRole" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole"></a>
 
-This construct creates a CircleCI ODIC provider to allow AWS access from CircleCI jobs.
-
-You'll need to instantiate
-this construct once per AWS account you want to use CircleCI OIDC with.
-
-To create a role that can be assumed by CircleCI jobs, use the `CircleCiOidcRole` construct.
+Define an IAM Role that can be assumed by a CircleCI Job via the CircleCI OpenID Connect Identity Provider.
 
 #### Initializers <a name="Initializers" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRole.Initializer"></a>
 
@@ -1611,7 +1589,7 @@ const circleCiOidcProviderProps: CircleCiOidcProviderProps = { ... }
 | **Name** | **Type** | **Description** |
 | --- | --- | --- |
 | <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.organizationId">organizationId</a></code> | <code>string</code> | The ID of your CircleCI organization. |
-| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.circleCiOidcThumbprints">circleCiOidcThumbprints</a></code> | <code>string[]</code> | The OIDC thumbprints used by the provider. |
+| <code><a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.thumbprints">thumbprints</a></code> | <code>string[]</code> | The OIDC thumbprints used by the provider. |
 
 ---
 
@@ -1630,10 +1608,10 @@ dashboard UI under the "Organization Settings" tab.
 
 ---
 
-##### `circleCiOidcThumbprints`<sup>Optional</sup> <a name="circleCiOidcThumbprints" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.circleCiOidcThumbprints"></a>
+##### `thumbprints`<sup>Optional</sup> <a name="thumbprints" id="@blimmer/cdk-circleci-oidc.CircleCiOidcProviderProps.property.thumbprints"></a>
 
 ```typescript
-public readonly circleCiOidcThumbprints: string[];
+public readonly thumbprints: string[];
 ```
 
 - *Type:* string[]
@@ -1649,6 +1627,11 @@ https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_
 ---
 
 ### CircleCiOidcRoleProps <a name="CircleCiOidcRoleProps" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps"></a>
+
+Props that define the IAM Role that can be assumed by a CircleCI job via the CircleCI OpenID Connect Identity Provider.
+
+Besides {@link CircleCiConfiguration}, you may pass in any {@link RoleProps} except `assumedBy`
+which will be defined by this construct.
 
 #### Initializer <a name="Initializer" id="@blimmer/cdk-circleci-oidc.CircleCiOidcRoleProps.Initializer"></a>
 
@@ -2049,6 +2032,8 @@ Acknowledging IAM Resources in AWS CloudFormation Templates.
 ### ICircleCiOidcProvider <a name="ICircleCiOidcProvider" id="@blimmer/cdk-circleci-oidc.ICircleCiOidcProvider"></a>
 
 - *Implemented By:* <a href="#@blimmer/cdk-circleci-oidc.CircleCiOidcProvider">CircleCiOidcProvider</a>, <a href="#@blimmer/cdk-circleci-oidc.ICircleCiOidcProvider">ICircleCiOidcProvider</a>
+
+Describes a CircleCI OpenID Connect Identity Provider for AWS IAM.
 
 
 #### Properties <a name="Properties" id="Properties"></a>
