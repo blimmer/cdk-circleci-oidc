@@ -39,6 +39,19 @@ describe("CircleCiOidcProvider", () => {
     });
   });
 
+  it("can override the thumbprint list", () => {
+    const app = new App();
+    const stack = new Stack(app, "TestStack");
+    new CircleCiOidcProvider(stack, "CircleCiOidcProvider", {
+      organizationId: "1234",
+      thumbprints: ["thumbprint"],
+    });
+
+    Template.fromStack(stack).hasResourceProperties("AWS::IAM::OIDCProvider", {
+      ThumbprintList: ["thumbprint"],
+    });
+  });
+
   it("can import an existing provider", () => {
     const app = new App();
     const stack = new Stack(app, "TestStack", {

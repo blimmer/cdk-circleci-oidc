@@ -1,6 +1,5 @@
 import { App, Stack } from "aws-cdk-lib";
 import { Match, Template } from "aws-cdk-lib/assertions";
-import { OpenIdConnectProvider } from "aws-cdk-lib/aws-iam";
 import { Queue } from "aws-cdk-lib/aws-sqs";
 import { CircleCiOidcProvider, CircleCiOidcRole } from "../src";
 
@@ -12,7 +11,7 @@ describe("CircleCiOidcRole", () => {
       organizationId: "1234",
     });
     new CircleCiOidcRole(stack, "CircleCiOidcRole", {
-      circleCiOidcProvider: provider,
+      provider,
     });
 
     Template.fromStack(stack).hasResourceProperties("AWS::IAM::Role", {
@@ -28,7 +27,7 @@ describe("CircleCiOidcRole", () => {
             },
             Principal: {
               Federated: {
-                "Fn::GetAtt": ["CircleCiOidcProviderBE49A2E7", "Arn"],
+                "Fn::GetAtt": ["CircleCiOidcProvider", "Arn"],
               },
             },
           }),
@@ -41,14 +40,7 @@ describe("CircleCiOidcRole", () => {
     const app = new App();
     const stack = new Stack(app, "TestStack");
     new CircleCiOidcRole(stack, "CircleCiOidcRole", {
-      circleCiOidcProvider: {
-        provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
-          stack,
-          "ImportProvider",
-          "arn:aws:iam::12345678910:oidc-provider/circleci",
-        ),
-        organizationId: "1234",
-      },
+      provider: CircleCiOidcProvider.fromOrganizationId(stack, "1234"),
     });
 
     Template.fromStack(stack).hasResourceProperties("AWS::IAM::Role", {
@@ -63,7 +55,18 @@ describe("CircleCiOidcRole", () => {
               },
             },
             Principal: {
-              Federated: "arn:aws:iam::12345678910:oidc-provider/circleci",
+              Federated: {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:iam::",
+                    {
+                      Ref: "AWS::AccountId",
+                    },
+                    ":oidc-provider/oidc.circleci.com/org/1234",
+                  ],
+                ],
+              },
             },
           }),
         ],
@@ -78,8 +81,8 @@ describe("CircleCiOidcRole", () => {
       organizationId: "1234",
     });
     new CircleCiOidcRole(stack, "CircleCiOidcRole", {
-      circleCiOidcProvider: provider,
-      circleCiProjectIds: ["1234", "5678"],
+      provider: provider,
+      projectIds: ["1234", "5678"],
     });
 
     Template.fromStack(stack).hasResourceProperties("AWS::IAM::Role", {
@@ -108,8 +111,8 @@ describe("CircleCiOidcRole", () => {
     const provider = new CircleCiOidcProvider(stack, "CircleCiOidcProvider", {
       organizationId: "1234",
     });
-    const { role } = new CircleCiOidcRole(stack, "CircleCiOidcRole", {
-      circleCiOidcProvider: provider,
+    const role = new CircleCiOidcRole(stack, "CircleCiOidcRole", {
+      provider,
     });
 
     const queue = new Queue(stack, "Queue");
@@ -119,7 +122,7 @@ describe("CircleCiOidcRole", () => {
       // Attached to the role
       Roles: [
         {
-          Ref: "CircleCiOidcRoleDC0C8DDB",
+          Ref: "CircleCiOidcRoleC059EF20",
         },
       ],
       PolicyDocument: {

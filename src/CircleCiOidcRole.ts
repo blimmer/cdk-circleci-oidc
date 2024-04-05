@@ -23,14 +23,16 @@ export interface CircleCiConfiguration {
   readonly projectIds?: string[];
 }
 
+/**
+ * Props that define the IAM Role that can be assumed by a CircleCI job
+ * via the CircleCI OpenID Connect Identity Provider.
+ *
+ * Besides {@link CircleCiConfiguration}, you may pass in any {@link RoleProps} except `assumedBy`
+ * which will be defined by this construct.
+ */
 export interface CircleCiOidcRoleProps extends CircleCiConfiguration, RoleProps {}
 
-/**
- * This construct creates a CircleCI ODIC provider to allow AWS access from CircleCI jobs. You'll need to instantiate
- * this construct once per AWS account you want to use CircleCI OIDC with.
- *
- * To create a role that can be assumed by CircleCI jobs, use the `CircleCiOidcRole` construct.
- */
+/** Define an IAM Role that can be assumed by a CircleCI Job via the CircleCI OpenID Connect Identity Provider. */
 export class CircleCiOidcRole extends Role {
   constructor(scope: Construct, id: string, props: CircleCiOidcRoleProps) {
     super(scope, id, {
@@ -47,11 +49,12 @@ export class CircleCiOidcRole extends Role {
         {
           StringEquals: {
             [`oidc.circleci.com/org/${props.provider.organizationId}:aud`]: props.provider.organizationId,
-            ...generateProjectCondition(
-              `oidc.circleci.com/org/${props.provider.organizationId}`,
-              props.provider.organizationId,
-            ),
           },
+          ...generateProjectCondition(
+            `oidc.circleci.com/org/${props.provider.organizationId}`,
+            props.provider.organizationId,
+            props.projectIds,
+          ),
         },
       ),
     });
