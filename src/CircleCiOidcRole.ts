@@ -1,6 +1,14 @@
-import { Condition, IManagedPolicy, IOpenIdConnectProvider, OpenIdConnectPrincipal, OpenIdConnectProvider, PolicyDocument, Role } from 'aws-cdk-lib/aws-iam';
-import { Construct } from 'constructs';
-import { CircleCiOidcProvider } from './CircleCiOidcProvider';
+import {
+  Condition,
+  IManagedPolicy,
+  IOpenIdConnectProvider,
+  OpenIdConnectPrincipal,
+  OpenIdConnectProvider,
+  PolicyDocument,
+  Role,
+} from "aws-cdk-lib/aws-iam";
+import { Construct } from "constructs";
+import { CircleCiOidcProvider } from "./CircleCiOidcProvider";
 
 /**
  * If you're using the {@link CircleCiOidcProvider} construct, pass it instead of these manually-defined props.
@@ -19,7 +27,9 @@ export interface ManualCircleCiOidcProviderProps {
 }
 
 export interface CircleCiOidcRoleProps {
-  readonly circleCiOidcProvider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps;
+  readonly circleCiOidcProvider:
+    | CircleCiOidcProvider
+    | ManualCircleCiOidcProviderProps;
 
   /**
    * Provide the UUID(s) of the CircleCI project(s) you want to be allowed to use this role. If you don't provide this
@@ -58,33 +68,55 @@ export class CircleCiOidcRole extends Construct {
     super(scope, id);
 
     const { circleCiProjectIds, circleCiOidcProvider, ...roleProps } = props;
-    const { provider, organizationId } = this.extractOpenIdConnectProvider(circleCiOidcProvider);
+    const { provider, organizationId } =
+      this.extractOpenIdConnectProvider(circleCiOidcProvider);
     const oidcUrl = `oidc.circleci.com/org/${organizationId}`;
 
-    this.role = new Role(this, 'CircleCiOidcRole', {
+    this.role = new Role(this, "CircleCiOidcRole", {
       assumedBy: new OpenIdConnectPrincipal(provider, {
         StringEquals: { [`${oidcUrl}:aud`]: organizationId },
-        ...this.generateProjectCondition(oidcUrl, organizationId, circleCiProjectIds),
+        ...this.generateProjectCondition(
+          oidcUrl,
+          organizationId,
+          circleCiProjectIds,
+        ),
       }),
       ...roleProps,
     });
   }
 
-  private extractOpenIdConnectProvider(provider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps) {
+  private extractOpenIdConnectProvider(
+    provider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps,
+  ) {
     if (provider instanceof CircleCiOidcProvider) {
-      return { provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(this, 'ImportOidcProvider', provider.provider.attrArn), organizationId: provider.organizationId };
+      return {
+        provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
+          this,
+          "ImportOidcProvider",
+          provider.provider.attrArn,
+        ),
+        organizationId: provider.organizationId,
+      };
     } else {
       return provider;
     }
   }
 
-  private generateProjectCondition(oidcUrl: string, organizationId: string, circleCiProjectIds?: string[]): Condition {
+  private generateProjectCondition(
+    oidcUrl: string,
+    organizationId: string,
+    circleCiProjectIds?: string[],
+  ): Condition {
     if (!circleCiProjectIds || circleCiProjectIds.length === 0) {
       return {};
     }
 
     return {
-      StringLike: { [`${oidcUrl}:sub`]: circleCiProjectIds.map((projectId) => `org/${organizationId}/project/${projectId}/*`) },
+      StringLike: {
+        [`${oidcUrl}:sub`]: circleCiProjectIds.map(
+          (projectId) => `org/${organizationId}/project/${projectId}/*`,
+        ),
+      },
     };
   }
 }

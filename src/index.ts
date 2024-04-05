@@ -1,2 +1,2 @@
-export * from './CircleCiOidcProvider';
-export * from './CircleCiOidcRole';
+export * from "./CircleCiOidcProvider";
+export * from "./CircleCiOidcRole";

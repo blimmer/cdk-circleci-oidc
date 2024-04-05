@@ -1,20 +1,20 @@
-import { awscdk } from 'projen';
+import { awscdk } from "projen";
 
 const project = new awscdk.AwsCdkConstructLibrary({
-  author: 'Ben Limmer',
-  authorAddress: 'hello@benlimmer.com',
-  cdkVersion: '2.1.0',
-  defaultReleaseBranch: 'main',
-  name: '@blimmer/cdk-circleci-oidc',
-  repositoryUrl: 'https://github.com/blimmer/cdk-circleci-oidc.git',
+  author: "Ben Limmer",
+  authorAddress: "hello@benlimmer.com",
+  cdkVersion: "2.1.0",
+  defaultReleaseBranch: "main",
+  name: "@blimmer/cdk-circleci-oidc",
+  repositoryUrl: "https://github.com/blimmer/cdk-circleci-oidc.git",
 
   projenrcTs: true,
 
   jsiiVersion: "~5.0.0",
 
   python: {
-    distName: 'cdk-circleci-oidc',
-    module: 'cdk_circleci_oidc',
+    distName: "cdk-circleci-oidc",
+    module: "cdk_circleci_oidc",
   },
 
   depsUpgrade: false,
