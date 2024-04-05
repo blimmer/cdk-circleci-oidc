@@ -32,10 +32,7 @@ export class CircleCiOidcProvider extends Construct {
   constructor(scope: Construct, id: string, props: CircleCiOidcProviderProps) {
     super(scope, id);
 
-    const {
-      organizationId,
-      circleCiOidcThumbprints = ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"],
-    } = props;
+    const { organizationId, circleCiOidcThumbprints = ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"] } = props;
 
     // The L2 construct uses a Custom Resource, which is slow and has a few known issues
     // (see https://github.com/aws/aws-cdk/issues/21197#issuecomment-1312843734)

@@ -27,9 +27,7 @@ export interface ManualCircleCiOidcProviderProps {
 }
 
 export interface CircleCiOidcRoleProps {
-  readonly circleCiOidcProvider:
-    | CircleCiOidcProvider
-    | ManualCircleCiOidcProviderProps;
+  readonly circleCiOidcProvider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps;
 
   /**
    * Provide the UUID(s) of the CircleCI project(s) you want to be allowed to use this role. If you don't provide this
@@ -68,26 +66,19 @@ export class CircleCiOidcRole extends Construct {
     super(scope, id);
 
     const { circleCiProjectIds, circleCiOidcProvider, ...roleProps } = props;
-    const { provider, organizationId } =
-      this.extractOpenIdConnectProvider(circleCiOidcProvider);
+    const { provider, organizationId } = this.extractOpenIdConnectProvider(circleCiOidcProvider);
     const oidcUrl = `oidc.circleci.com/org/${organizationId}`;
 
     this.role = new Role(this, "CircleCiOidcRole", {
       assumedBy: new OpenIdConnectPrincipal(provider, {
         StringEquals: { [`${oidcUrl}:aud`]: organizationId },
-        ...this.generateProjectCondition(
-          oidcUrl,
-          organizationId,
-          circleCiProjectIds,
-        ),
+        ...this.generateProjectCondition(oidcUrl, organizationId, circleCiProjectIds),
       }),
       ...roleProps,
     });
   }
 
-  private extractOpenIdConnectProvider(
-    provider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps,
-  ) {
+  private extractOpenIdConnectProvider(provider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps) {
     if (provider instanceof CircleCiOidcProvider) {
       return {
         provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
@@ -102,20 +93,14 @@ export class CircleCiOidcRole extends Construct {
     }
   }
 
-  private generateProjectCondition(
-    oidcUrl: string,
-    organizationId: string,
-    circleCiProjectIds?: string[],
-  ): Condition {
+  private generateProjectCondition(oidcUrl: string, organizationId: string, circleCiProjectIds?: string[]): Condition {
     if (!circleCiProjectIds || circleCiProjectIds.length === 0) {
       return {};
     }
 
     return {
       StringLike: {
-        [`${oidcUrl}:sub`]: circleCiProjectIds.map(
-          (projectId) => `org/${organizationId}/project/${projectId}/*`,
-        ),
+        [`${oidcUrl}:sub`]: circleCiProjectIds.map((projectId) => `org/${organizationId}/project/${projectId}/*`),
       },
     };
   }

@@ -1,4 +1,5 @@
 import { awscdk } from "projen";
+import { ProseWrap } from "projen/lib/javascript";
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "Ben Limmer",
@@ -20,6 +21,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
   depsUpgrade: false,
 
   prettier: true,
+  prettierOptions: {
+    settings: {
+      printWidth: 120,
+      proseWrap: ProseWrap.ALWAYS,
+    },
+  },
 
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */

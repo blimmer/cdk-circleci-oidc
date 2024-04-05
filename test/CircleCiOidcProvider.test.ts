@@ -40,8 +40,6 @@ describe("CircleCiOidcProvider", () => {
     expect(providerForExport.provider.openIdConnectProviderArn).toEqual(
       "arn:aws:iam::123456789012:oidc-provider/oidc.circleci.com/org/1234",
     );
-    expect(providerForExport.provider.openIdConnectProviderIssuer).toEqual(
-      "oidc.circleci.com/org/1234",
-    );
+    expect(providerForExport.provider.openIdConnectProviderIssuer).toEqual("oidc.circleci.com/org/1234");
   });
 });

@@ -93,10 +93,7 @@ describe("CircleCiOidcRole", () => {
                 "oidc.circleci.com/org/1234:aud": "1234",
               },
               StringLike: {
-                "oidc.circleci.com/org/1234:sub": [
-                  "org/1234/project/1234/*",
-                  "org/1234/project/5678/*",
-                ],
+                "oidc.circleci.com/org/1234:sub": ["org/1234/project/1234/*", "org/1234/project/5678/*"],
               },
             },
           }),
