@@ -1,4 +1,4 @@
-import { awscdk } from "projen";
+import { ReleasableCommits, awscdk } from "projen";
 import { ProseWrap } from "projen/lib/javascript";
 
 const project = new awscdk.AwsCdkConstructLibrary({
@@ -13,6 +13,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   jsiiVersion: "~5.0.0",
 
+  releasableCommits: ReleasableCommits.featuresAndFixes(), // don't release "chore" commits
   python: {
     distName: "cdk-circleci-oidc",
     module: "cdk_circleci_oidc",
