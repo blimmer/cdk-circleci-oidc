@@ -4,7 +4,7 @@ import { ProseWrap } from "projen/lib/javascript";
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "Ben Limmer",
   authorAddress: "hello@benlimmer.com",
-  cdkVersion: "2.1.0",
+  cdkVersion: "2.73.0", // Released in April 2023
   defaultReleaseBranch: "main",
   name: "@blimmer/cdk-circleci-oidc",
   repositoryUrl: "https://github.com/blimmer/cdk-circleci-oidc.git",
