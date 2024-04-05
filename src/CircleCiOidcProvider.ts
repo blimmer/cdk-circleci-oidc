@@ -1,6 +1,6 @@
-import { CfnOIDCProvider, OpenIdConnectProvider } from 'aws-cdk-lib/aws-iam';
-import { Construct } from 'constructs';
-import { ManualCircleCiOidcProviderProps } from './CircleCiOidcRole';
+import { CfnOIDCProvider, OpenIdConnectProvider } from "aws-cdk-lib/aws-iam";
+import { Construct } from "constructs";
+import { ManualCircleCiOidcProviderProps } from "./CircleCiOidcRole";
 
 export interface CircleCiOidcProviderProps {
   /**
@@ -32,15 +32,12 @@ export class CircleCiOidcProvider extends Construct {
   constructor(scope: Construct, id: string, props: CircleCiOidcProviderProps) {
     super(scope, id);
 
-    const {
-      organizationId,
-      circleCiOidcThumbprints = ['9e99a48a9960b14926bb7f3b02e22da2b0ab7280'],
-    } = props;
+    const { organizationId, circleCiOidcThumbprints = ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"] } = props;
 
     // The L2 construct uses a Custom Resource, which is slow and has a few known issues
     // (see https://github.com/aws/aws-cdk/issues/21197#issuecomment-1312843734)
     // Therefore, we use the L1 OIDC provider construct directly instead.
-    this.provider = new CfnOIDCProvider(this, 'CircleCiOidcProvider', {
+    this.provider = new CfnOIDCProvider(this, "CircleCiOidcProvider", {
       url: `https://oidc.circleci.com/org/${organizationId}`,
       clientIdList: [organizationId],
       thumbprintList: circleCiOidcThumbprints,
@@ -49,7 +46,10 @@ export class CircleCiOidcProvider extends Construct {
     this.organizationId = organizationId;
   }
 
-  public getProviderForExport(accountId: string, importName = 'CircleCiOidcProviderForExport'): ManualCircleCiOidcProviderProps {
+  public getProviderForExport(
+    accountId: string,
+    importName = "CircleCiOidcProviderForExport",
+  ): ManualCircleCiOidcProviderProps {
     return {
       provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
         this,

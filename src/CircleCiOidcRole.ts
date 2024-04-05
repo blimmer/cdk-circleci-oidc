@@ -1,6 +1,14 @@
-import { Condition, IManagedPolicy, IOpenIdConnectProvider, OpenIdConnectPrincipal, OpenIdConnectProvider, PolicyDocument, Role } from 'aws-cdk-lib/aws-iam';
-import { Construct } from 'constructs';
-import { CircleCiOidcProvider } from './CircleCiOidcProvider';
+import {
+  Condition,
+  IManagedPolicy,
+  IOpenIdConnectProvider,
+  OpenIdConnectPrincipal,
+  OpenIdConnectProvider,
+  PolicyDocument,
+  Role,
+} from "aws-cdk-lib/aws-iam";
+import { Construct } from "constructs";
+import { CircleCiOidcProvider } from "./CircleCiOidcProvider";
 
 /**
  * If you're using the {@link CircleCiOidcProvider} construct, pass it instead of these manually-defined props.
@@ -61,7 +69,7 @@ export class CircleCiOidcRole extends Construct {
     const { provider, organizationId } = this.extractOpenIdConnectProvider(circleCiOidcProvider);
     const oidcUrl = `oidc.circleci.com/org/${organizationId}`;
 
-    this.role = new Role(this, 'CircleCiOidcRole', {
+    this.role = new Role(this, "CircleCiOidcRole", {
       assumedBy: new OpenIdConnectPrincipal(provider, {
         StringEquals: { [`${oidcUrl}:aud`]: organizationId },
         ...this.generateProjectCondition(oidcUrl, organizationId, circleCiProjectIds),
@@ -72,7 +80,14 @@ export class CircleCiOidcRole extends Construct {
 
   private extractOpenIdConnectProvider(provider: CircleCiOidcProvider | ManualCircleCiOidcProviderProps) {
     if (provider instanceof CircleCiOidcProvider) {
-      return { provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(this, 'ImportOidcProvider', provider.provider.attrArn), organizationId: provider.organizationId };
+      return {
+        provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
+          this,
+          "ImportOidcProvider",
+          provider.provider.attrArn,
+        ),
+        organizationId: provider.organizationId,
+      };
     } else {
       return provider;
     }
@@ -84,7 +99,9 @@ export class CircleCiOidcRole extends Construct {
     }
 
     return {
-      StringLike: { [`${oidcUrl}:sub`]: circleCiProjectIds.map((projectId) => `org/${organizationId}/project/${projectId}/*`) },
+      StringLike: {
+        [`${oidcUrl}:sub`]: circleCiProjectIds.map((projectId) => `org/${organizationId}/project/${projectId}/*`),
+      },
     };
   }
 }
