@@ -1,5 +1,11 @@
+import { Stack } from "aws-cdk-lib";
 import { CfnOIDCProvider } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
+
+export interface ICircleCiOidcProvider {
+  readonly arn: string;
+  readonly organizationId: string;
+}
 
 export interface CircleCiOidcProviderProps {
   /**
@@ -24,8 +30,18 @@ export interface CircleCiOidcProviderProps {
  *
  * To create a role that can be assumed by CircleCI jobs, use the `CircleCiOidcRole` construct.
  */
-export class CircleCiOidcProvider extends CfnOIDCProvider {
+export class CircleCiOidcProvider extends CfnOIDCProvider implements ICircleCiOidcProvider {
+  public static fromOrganizationId(scope: Construct, organizationId: string): ICircleCiOidcProvider {
+    const accountId = Stack.of(scope).account;
+    const providerArn = `arn:aws:iam::${accountId}:oidc-provider/oidc.circleci.com/org/${organizationId}`;
+    return {
+      arn: providerArn,
+      organizationId,
+    };
+  }
+
   public readonly organizationId: string;
+  public readonly arn: string;
 
   constructor(scope: Construct, id: string, props: CircleCiOidcProviderProps) {
     super(scope, id, {
@@ -34,6 +50,7 @@ export class CircleCiOidcProvider extends CfnOIDCProvider {
       thumbprintList: props.circleCiOidcThumbprints ?? ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"],
     });
 
+    this.arn = this.attrArn;
     this.organizationId = props.organizationId;
   }
 }
