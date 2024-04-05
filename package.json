@@ -33,6 +33,7 @@
     "organization": false
   },
   "devDependencies": {
+    "@mrgrain/jsii-struct-builder": "^0.7.21",
     "@types/jest": "^27",
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^6",

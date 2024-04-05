@@ -1,3 +1,4 @@
+import { ProjenStruct, Struct } from "@mrgrain/jsii-struct-builder";
 import { ReleasableCommits, awscdk } from "projen";
 import { ProseWrap } from "projen/lib/javascript";
 
@@ -19,8 +20,14 @@ const project = new awscdk.AwsCdkConstructLibrary({
     module: "cdk_circleci_oidc",
   },
 
+  // deps: [],
+  devDeps: ["@mrgrain/jsii-struct-builder"],
   depsUpgrade: false,
 
+  eslintOptions: {
+    dirs: ["src"],
+    ignorePatterns: ["generated/*.ts"], // ignore generated files
+  },
   prettier: true,
   prettierOptions: {
     settings: {
@@ -28,11 +35,10 @@ const project = new awscdk.AwsCdkConstructLibrary({
       proseWrap: ProseWrap.ALWAYS,
     },
   },
-
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
 });
+
+new ProjenStruct(project, { name: "RoleProps", filePath: "src/generated/iam-role-props.ts" }).mixin(
+  Struct.fromFqn("aws-cdk-lib.aws_iam.RoleProps").omit("assumedBy").withoutDeprecated(),
+);
 
 project.synth();
