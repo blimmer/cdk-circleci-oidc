@@ -72,6 +72,7 @@ export class CircleCiOidcRole extends Construct {
     this.role = new Role(this, "CircleCiOidcRole", {
       assumedBy: new OpenIdConnectPrincipal(provider, {
         StringEquals: { [`${oidcUrl}:aud`]: organizationId },
+        // @ts-ignore
         ...this.generateProjectCondition(oidcUrl, organizationId, circleCiProjectIds),
       }),
       ...roleProps,

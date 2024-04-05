@@ -26,7 +26,7 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   eslintOptions: {
     dirs: ["src"],
-    ignorePatterns: ["generated/*.ts"], // ignore generated files
+    ignorePatterns: ["src/generated/*.ts"], // ignore generated files
   },
   prettier: true,
   prettierOptions: {
