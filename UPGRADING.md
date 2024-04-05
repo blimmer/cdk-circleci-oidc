@@ -1,15 +1,115 @@
 # Upgrading
 
-## 0.x to 1.0
+## 0.x to 1.x
 
 The API underwent breaking changes between the 0.x and 1.x releases.
+
+### Minimum CDK Version
+
+This construct is only tested with CDK 2.73.0 and later. You should upgrade to at least this version before upgrading to
+1.x.
+
+### Simpler Import of Existing Providers
+
+Previously, using an existing `CircleCiOidcProvider` was confusing and complicated. Now, you can very easily import an
+existing provider (e.g., one that's created in another stack or repo) by using the
+`CircleCiOidcProvider.fromOrganizationId` static method.
+
+Before:
+
+```typescript
+const provider: ManualCircleCiOidcProviderProps = {
+  provider: OpenIdConnectProvider.fromOpenIdConnectProviderArn(
+    this,
+    "CircleCiOidcProviderImport",
+    "arn:aws:iam::12345678910:oidc-provider/oidc.circleci.com/org/123e4567-e89b-12d3-a456-426614174000",
+  ),
+  organizationId: "123e4567-e89b-12d3-a456-426614174000",
+};
+
+const role = new CircleCiOidcRole(this, "CircleCiOidcRole", {
+  circleCiOidcProvider: provider,
+});
+```
+
+After:
+
+```typescript
+const provider = CircleCiOidcProvider.fromOrganizationId(this, "123e4567-e89b-12d3-a456-426614174000");
+const role = new CircleCiOidcRole(this, "CircleCiOidcRole", {
+  provider,
+});
+```
+
+Much better!
+
+### `CircleCiOidcRole` Constructor Property Changes
+
+The properties `circleCiOidcProvider` and `circleCiProjectIds` have been renamed to `provider` and `projectIds` for
+brevity.
+
+Before:
+
+```typescript
+const role = new CircleCiOidcRole(this, "CircleCiOidcRole", {
+  circleCiOidcProvider: provider,
+  circleCiProjectIds: ["b4f04e57-c8b2-4d80-9526-dc9b1b7a63ad"],
+});
+```
+
+After:
+
+```typescript
+const role = new CircleCiOidcRole(this, "CircleCiOidcRole", {
+  provider,
+  projectIds: ["b4f04e57-c8b2-4d80-9526-dc9b1b7a63ad"],
+});
+```
 
 ### Removal of Outer Constructs
 
 `CircleCiOidcProvider` and `CircleCiOidcRole` now _extend_ `CfnOIDCProvider` and `Role`, respectively. This makes them
 simpler to work with and more idiomatic to the CDK.
 
-Because of this change, you might see changes like this in your CDK diff when upgrading:
+Before:
+
+```typescript
+const role = new CircleCiOidcRole(this, "CircleCiOidcRole", {
+  circleCiOidcProvider: provider,
+  circleCiProjectIds: ["b4f04e57-c8b2-4d80-9526-dc9b1b7a63ad"],
+});
+
+// It was annoying to have to access role.role to add permissions
+role.role.addToPolicy(
+  new PolicyStatement({
+    actions: ["s3:GetObject"],
+    resources: ["arn:aws:s3:::my-bucket/*"],
+  }),
+);
+bucket.grantRead(role.role);
+```
+
+After:
+
+```typescript
+const role = new CircleCiOidcRole(this, "CircleCiOidcRole", {
+  provider,
+  projectIds: ["b4f04e57-c8b2-4d80-9526-dc9b1b7a63ad"],
+});
+
+// Now the `CircleCiOidcRole` is a `Role` and you can add permissions directly
+role.addToPolicy(
+  new PolicyStatement({
+    actions: ["s3:GetObject"],
+    resources: ["arn:aws:s3:::my-bucket/*"],
+  }),
+);
+```
+
+### `cdk diff` Caused by Internal Refactoring
+
+Because of the [removal of outer constructs](#removal-of-outer-constructs), you might see changes like this in your CDK
+diff when upgrading:
 
 ```shell
 Resources
