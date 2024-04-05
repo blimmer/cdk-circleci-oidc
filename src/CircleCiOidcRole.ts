@@ -39,7 +39,11 @@ export class CircleCiOidcRole extends Role {
         // See https://github.com/aws/aws-cdk/issues/21197
         // However, the OpenIdConnectPrincipal still expects the L2 OpenIdConnectProvider, so we "import" it here to
         // make TypeScript happy with the types.
-        OpenIdConnectProvider.fromOpenIdConnectProviderArn(scope, "CircleCiOidcProvider", props.provider.arn),
+        OpenIdConnectProvider.fromOpenIdConnectProviderArn(
+          scope,
+          `CircleCiOidcProviderImport${id}`,
+          props.provider.arn,
+        ),
         {
           StringEquals: {
             [`oidc.circleci.com/org/${props.provider.organizationId}:aud`]: props.provider.organizationId,
