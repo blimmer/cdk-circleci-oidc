@@ -2,6 +2,7 @@ import { Stack } from "aws-cdk-lib";
 import { CfnOIDCProvider } from "aws-cdk-lib/aws-iam";
 import { Construct } from "constructs";
 
+/** Describes a CircleCI OpenID Connect Identity Provider for AWS IAM. */
 export interface ICircleCiOidcProvider {
   readonly arn: string;
   readonly organizationId: string;
@@ -27,6 +28,8 @@ export interface CircleCiOidcProviderProps {
 /**
  * This construct creates a CircleCI ODIC provider to allow AWS access from CircleCI jobs. You'll need to instantiate
  * this construct once per AWS account you want to use CircleCI OIDC with.
+ *
+ * You can import a existing provider using `CircleCiOidcProvider.fromOrganizationId`.
  *
  * To create a role that can be assumed by CircleCI jobs, use the `CircleCiOidcRole` construct.
  */

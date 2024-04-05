@@ -14,6 +14,7 @@ describe("CircleCiOidcProvider", () => {
       Url: "https://oidc.circleci.com/org/1234",
     });
   });
+
   it("uses the organization ID as the client ID", () => {
     const app = new App();
     const stack = new Stack(app, "TestStack");
@@ -25,6 +26,7 @@ describe("CircleCiOidcProvider", () => {
       ClientIdList: ["1234"],
     });
   });
+
   it("uses a default thumbprint list", () => {
     const app = new App();
     const stack = new Stack(app, "TestStack");
@@ -35,5 +37,25 @@ describe("CircleCiOidcProvider", () => {
     Template.fromStack(stack).hasResourceProperties("AWS::IAM::OIDCProvider", {
       ThumbprintList: ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"],
     });
+  });
+
+  it("can import an existing provider", () => {
+    const app = new App();
+    const stack = new Stack(app, "TestStack", {
+      env: { account: "123456789012", region: "us-west-2" },
+    });
+    const provider = CircleCiOidcProvider.fromOrganizationId(stack, "1234");
+
+    expect(provider.arn).toEqual("arn:aws:iam::123456789012:oidc-provider/oidc.circleci.com/org/1234");
+    expect(provider.organizationId).toEqual("1234");
+  });
+
+  it("can import an existing provider when the stack is environment agnostic", () => {
+    const app = new App();
+    const stack = new Stack(app, "TestStack");
+    const provider = CircleCiOidcProvider.fromOrganizationId(stack, "1234");
+
+    expect(provider.arn).toEqual(`arn:aws:iam::${Stack.of(stack).account}:oidc-provider/oidc.circleci.com/org/1234`);
+    expect(provider.organizationId).toEqual("1234");
   });
 });
