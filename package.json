@@ -33,11 +33,12 @@
     "organization": false
   },
   "devDependencies": {
+    "@mrgrain/jsii-struct-builder": "^0.7.21",
     "@types/jest": "^27",
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
-    "aws-cdk-lib": "2.1.0",
+    "aws-cdk-lib": "2.73.0",
     "constructs": "10.0.5",
     "eslint": "^8",
     "eslint-config-prettier": "^9.1.0",
@@ -59,7 +60,7 @@
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.1.0",
+    "aws-cdk-lib": "^2.73.0",
     "constructs": "^10.0.5"
   },
   "keywords": [
@@ -67,6 +68,14 @@
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "typesVersions": {
+    "<=3.9": {
+      "lib/*": [
+        "lib/.types-compat/ts3.9/*",
+        "lib/.types-compat/ts3.9/*/index.d.ts"
+      ]
+    }
+  },
   "version": "0.0.0",
   "jest": {
     "testMatch": [
