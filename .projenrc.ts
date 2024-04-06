@@ -9,6 +9,8 @@ const project = new awscdk.AwsCdkConstructLibrary({
   defaultReleaseBranch: "main",
   name: "@blimmer/cdk-circleci-oidc",
   repositoryUrl: "https://github.com/blimmer/cdk-circleci-oidc.git",
+  description: "AWS CDK construct to create OIDC roles for CircleCI jobs",
+  keywords: ["cdk", "aws-cdk", "awscdk", "aws", "iam", "circleci", "oidc", "openid-connect"],
   majorVersion: 1,
 
   projenrcTs: true,

@@ -1,5 +1,6 @@
 {
   "name": "@blimmer/cdk-circleci-oidc",
+  "description": "AWS CDK construct to create OIDC roles for CircleCI jobs",
   "repository": {
     "type": "git",
     "url": "https://github.com/blimmer/cdk-circleci-oidc.git"
@@ -64,7 +65,14 @@
     "constructs": "^10.0.5"
   },
   "keywords": [
-    "cdk"
+    "aws",
+    "aws-cdk",
+    "awscdk",
+    "cdk",
+    "circleci",
+    "iam",
+    "oidc",
+    "openid-connect"
   ],
   "main": "lib/index.js",
   "license": "Apache-2.0",
