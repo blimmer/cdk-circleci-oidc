@@ -105,6 +105,24 @@ describe("CircleCiOidcRole", () => {
     });
   });
 
+  it("passes through other RoleProps", () => {
+    const app = new App();
+    const stack = new Stack(app, "TestStack");
+    const provider = new CircleCiOidcProvider(stack, "CircleCiOidcProvider", {
+      organizationId: "1234",
+    });
+    new CircleCiOidcRole(stack, "CircleCiOidcRole", {
+      provider,
+      roleName: "MyRole",
+      description: "My Role",
+    });
+
+    Template.fromStack(stack).hasResourceProperties("AWS::IAM::Role", {
+      RoleName: "MyRole",
+      Description: "My Role",
+    });
+  });
+
   it("allows adding to the role", () => {
     const app = new App();
     const stack = new Stack(app, "TestStack");
