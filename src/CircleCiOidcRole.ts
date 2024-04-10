@@ -35,28 +35,26 @@ export interface CircleCiOidcRoleProps extends CircleCiConfiguration, RoleProps 
 /** Define an IAM Role that can be assumed by a CircleCI Job via the CircleCI OpenID Connect Identity Provider. */
 export class CircleCiOidcRole extends Role {
   constructor(scope: Construct, id: string, props: CircleCiOidcRoleProps) {
+    const { provider, projectIds, ...roleProps } = props;
     super(scope, id, {
       assumedBy: new OpenIdConnectPrincipal(
         // We use the CfnOIDCProvider instead of the OpenIdConnectProvider since it's overly complex
         // See https://github.com/aws/aws-cdk/issues/21197
         // However, the OpenIdConnectPrincipal still expects the L2 OpenIdConnectProvider, so we "import" it here to
         // make TypeScript happy with the types.
-        OpenIdConnectProvider.fromOpenIdConnectProviderArn(
-          scope,
-          `CircleCiOidcProviderImport${id}`,
-          props.provider.arn,
-        ),
+        OpenIdConnectProvider.fromOpenIdConnectProviderArn(scope, `CircleCiOidcProviderImport${id}`, provider.arn),
         {
           StringEquals: {
-            [`oidc.circleci.com/org/${props.provider.organizationId}:aud`]: props.provider.organizationId,
+            [`oidc.circleci.com/org/${provider.organizationId}:aud`]: provider.organizationId,
           },
           ...generateProjectCondition(
-            `oidc.circleci.com/org/${props.provider.organizationId}`,
-            props.provider.organizationId,
-            props.projectIds,
+            `oidc.circleci.com/org/${provider.organizationId}`,
+            provider.organizationId,
+            projectIds,
           ),
         },
       ),
+      ...roleProps,
     });
   }
 }
