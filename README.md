@@ -131,7 +131,7 @@ pip install cdk-circleci-oidc
 
 ## Upgrading Between Major Versions
 
-The API can be expected to change between major versions. Please consult the [UPGRADING docs](/UPGRADING.md.md) for for
+The API can be expected to change between major versions. Please consult the [UPGRADING docs](/UPGRADING.md) for for
 information.
 
 ## Contributing
