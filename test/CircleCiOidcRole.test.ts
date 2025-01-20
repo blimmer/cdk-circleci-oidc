@@ -59,7 +59,11 @@ describe("CircleCiOidcRole", () => {
                 "Fn::Join": [
                   "",
                   [
-                    "arn:aws:iam::",
+                    "arn:",
+                    {
+                      Ref: "AWS::Partition",
+                    },
+                    ":iam::",
                     {
                       Ref: "AWS::AccountId",
                     },

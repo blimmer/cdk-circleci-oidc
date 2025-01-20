@@ -35,8 +35,8 @@ export interface CircleCiOidcProviderProps {
  */
 export class CircleCiOidcProvider extends CfnOIDCProvider implements ICircleCiOidcProvider {
   public static fromOrganizationId(scope: Construct, organizationId: string): ICircleCiOidcProvider {
-    const accountId = Stack.of(scope).account;
-    const providerArn = `arn:aws:iam::${accountId}:oidc-provider/oidc.circleci.com/org/${organizationId}`;
+    const { account, partition } = Stack.of(scope);
+    const providerArn = `arn:${partition}:iam::${account}:oidc-provider/oidc.circleci.com/org/${organizationId}`;
     return {
       arn: providerArn,
       organizationId,
