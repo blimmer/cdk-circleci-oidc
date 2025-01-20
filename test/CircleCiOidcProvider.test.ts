@@ -59,7 +59,9 @@ describe("CircleCiOidcProvider", () => {
     });
     const provider = CircleCiOidcProvider.fromOrganizationId(stack, "1234");
 
-    expect(provider.arn).toEqual("arn:aws:iam::123456789012:oidc-provider/oidc.circleci.com/org/1234");
+    expect(provider.arn).toEqual(
+      `arn:${Stack.of(stack).partition}:iam::123456789012:oidc-provider/oidc.circleci.com/org/1234`,
+    );
     expect(provider.organizationId).toEqual("1234");
   });
 
@@ -68,7 +70,9 @@ describe("CircleCiOidcProvider", () => {
     const stack = new Stack(app, "TestStack");
     const provider = CircleCiOidcProvider.fromOrganizationId(stack, "1234");
 
-    expect(provider.arn).toEqual(`arn:aws:iam::${Stack.of(stack).account}:oidc-provider/oidc.circleci.com/org/1234`);
+    expect(provider.arn).toEqual(
+      `arn:${Stack.of(stack).partition}:iam::${Stack.of(stack).account}:oidc-provider/oidc.circleci.com/org/1234`,
+    );
     expect(provider.organizationId).toEqual("1234");
   });
 });
