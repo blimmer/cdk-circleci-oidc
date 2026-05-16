@@ -86,6 +86,9 @@
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "typesVersions": {
     "<=3.9": {
       "lib/*": [

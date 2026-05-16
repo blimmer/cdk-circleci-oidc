@@ -103,6 +103,7 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
@@ -140,7 +141,8 @@ jobs:
         env:
           NPM_DIST_TAG: latest
           NPM_REGISTRY: registry.npmjs.org
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: "true"
+          NPM_TRUSTED_PUBLISHER: "true"
           PUBLIB_DRYRUN: ${{ inputs.dry_run }}
         run: npx -p publib@latest publib-npm
   release_pypi:
@@ -149,6 +151,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
     if: needs.release.outputs.tag_exists != 'true' && needs.release.outputs.latest_commit == github.sha
     steps:
       - uses: actions/setup-node@v6
@@ -186,7 +189,6 @@ jobs:
         run: mv .repo/dist dist
       - name: Release
         env:
-          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+          PYPI_TRUSTED_PUBLISHER: "true"
           PUBLIB_DRYRUN: ${{ inputs.dry_run }}
         run: npx -p publib@latest publib-pypi

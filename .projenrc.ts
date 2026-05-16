@@ -1,6 +1,6 @@
 import { ProjenStruct, Struct } from "@mrgrain/jsii-struct-builder";
 import { ReleasableCommits, awscdk } from "projen";
-import { NodePackageManager, ProseWrap } from "projen/lib/javascript";
+import { NodePackageManager, NpmAccess, ProseWrap } from "projen/lib/javascript";
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "Ben Limmer",
@@ -21,9 +21,12 @@ const project = new awscdk.AwsCdkConstructLibrary({
   workflowPackageCache: true,
 
   releasableCommits: ReleasableCommits.featuresAndFixes(), // don't release "chore" commits
+  npmAccess: NpmAccess.PUBLIC,
+  npmTrustedPublishing: true,
   python: {
     distName: "cdk-circleci-oidc",
     module: "cdk_circleci_oidc",
+    trustedPublishing: true,
   },
 
   // deps: [],
