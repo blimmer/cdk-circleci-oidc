@@ -15,7 +15,6 @@ const project = new awscdk.AwsCdkConstructLibrary({
   majorVersion: 1,
 
   projenrcTs: true,
-  projenVersion: "^0.99.55",
 
   packageManager: NodePackageManager.PNPM,
   workflowNodeVersion: "24",
