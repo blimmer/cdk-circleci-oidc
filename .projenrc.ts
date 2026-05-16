@@ -1,6 +1,7 @@
 import { ProjenStruct, Struct } from "@mrgrain/jsii-struct-builder";
 import { ReleasableCommits, awscdk } from "projen";
-import { NodePackageManager, NpmAccess, ProseWrap } from "projen/lib/javascript";
+import { GithubCredentials } from "projen/lib/github";
+import { NodePackageManager, NpmAccess, ProseWrap, UpgradeDependenciesSchedule } from "projen/lib/javascript";
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "Ben Limmer",
@@ -20,6 +21,16 @@ const project = new awscdk.AwsCdkConstructLibrary({
   workflowNodeVersion: "24",
   workflowPackageCache: true,
 
+  githubOptions: {
+    projenCredentials: GithubCredentials.fromApp(),
+  },
+
+  autoApproveUpgrades: true,
+  autoApproveOptions: {
+    allowedUsernames: ["projen-automation-app[bot]"],
+    secret: "AUTO_APPROVE_GITHUB_TOKEN", // if https://github.com/projen/projen/issues/1736 is fixed, we could use the app instead
+  },
+
   releasableCommits: ReleasableCommits.featuresAndFixes(), // don't release "chore" commits
   npmAccess: NpmAccess.PUBLIC,
   npmTrustedPublishing: true,
@@ -32,6 +43,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
   // deps: [],
   devDeps: ["@mrgrain/jsii-struct-builder"],
   depsUpgradeOptions: {
+    workflowOptions: {
+      schedule: UpgradeDependenciesSchedule.MONTHLY,
+    },
     cooldown: 5,
   },
 
