@@ -1,6 +1,6 @@
 import { ProjenStruct, Struct } from "@mrgrain/jsii-struct-builder";
 import { ReleasableCommits, awscdk } from "projen";
-import { ProseWrap } from "projen/lib/javascript";
+import { NodePackageManager, ProseWrap } from "projen/lib/javascript";
 
 const project = new awscdk.AwsCdkConstructLibrary({
   author: "Ben Limmer",
@@ -14,8 +14,11 @@ const project = new awscdk.AwsCdkConstructLibrary({
   majorVersion: 1,
 
   projenrcTs: true,
+  projenVersion: "^0.99.55",
 
-  jsiiVersion: "~5.7.0",
+  packageManager: NodePackageManager.PNPM,
+  workflowNodeVersion: "24",
+  workflowPackageCache: true,
 
   releasableCommits: ReleasableCommits.featuresAndFixes(), // don't release "chore" commits
   python: {
@@ -25,7 +28,9 @@ const project = new awscdk.AwsCdkConstructLibrary({
 
   // deps: [],
   devDeps: ["@mrgrain/jsii-struct-builder"],
-  depsUpgrade: false,
+  depsUpgradeOptions: {
+    cooldown: 5,
+  },
 
   eslintOptions: {
     dirs: ["src"],
